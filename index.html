@@ -2,11 +2,6 @@
 <html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fbfaf7"><title>Коран</title>
-<link rel="manifest" href="manifest.webmanifest">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-180.png">
-<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Коран"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
 <style>
 :root{box-sizing:border-box}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
@@ -364,6 +359,12 @@ body.sbv #tb{bottom:calc(40px + env(safe-area-inset-bottom,0px) + 64px)}
 .ntabs .ch.on{background:var(--tbon,#dcb26a);color:var(--tbonf,#1b140c);border-color:var(--tbonb,#dcb26a)}
 .ntabs .rb i{width:26px;height:20px}
 .ntabs .rb{width:44px;min-width:44px;height:40px;border-radius:13px;border:1px solid var(--tbb,rgba(227,184,102,.38));color:var(--rbc,#e3b866)}
+.ntabs{gap:6px}
+.ntabs .ch{font-size:12.5px;padding:0 2px}
+.ntabs .ch:nth-child(1){flex:1}
+.ntabs .ch:nth-child(2){flex:1.5}
+.ntabs .rb{width:40px;min-width:40px}
+.ntabs .rb i{width:22px;height:18px}
 .ntl{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;margin:0 -24px;padding:0 24px calc(14px + env(safe-area-inset-bottom,0px))}
 .ntl .grp{font-size:13px;letter-spacing:.4px;color:#e3b866;padding:16px 2px 4px;opacity:.9}
 .nr{position:relative;display:flex;align-items:center;gap:12px;padding:12px 24px;cursor:pointer;margin:0 -24px}
@@ -665,7 +666,7 @@ function DM(v){$('#dr').classList.toggle('on',!!v)}
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#drb .di'))softVibe()},true);
 function RND(){const tot=cum[113]+B[113][2].length,r=new Uint32Array(1);crypto.getRandomValues(r);const x=r[0]%tot;let s=0;while(s<113&&x>=cum[s+1])s++;const k=x-cum[s];softVibe();jump(s,k);toast('Сура '+B[s][0]+' · '+VN(s,k))}
 function O(v){st.o=v;sv();P('toc');$('#pb').scrollTop=0}
-function cf(s){let e=$('#cf');if(!e){e=document.createElement('div');e.id='cf';e.innerHTML='<div class=bx><p>Выйти из приложения?</p><div class=row><button class="ch on" onclick="cf(0);if(window.Android)Android.exit();else pwaExit()">Выйти</button><button class=ch onclick="cf(0)">Остаться</button></div></div>';document.body.appendChild(e)}e.style.display=s?'flex':'none'}
+function cf(s){let e=$('#cf');if(!e){e=document.createElement('div');e.id='cf';e.innerHTML='<div class=bx><p>Выйти из приложения?</p><div class=row><button class="ch on" onclick="cf(0);if(window.Android)Android.exit()">Выйти</button><button class=ch onclick="cf(0)">Остаться</button></div></div>';document.body.appendChild(e)}e.style.display=s?'flex':'none'}
 window.onBack=function(){if($('#dr').classList.contains('on')){DM(0);return}const e=$('#cf');if(e&&e.style.display=='flex'){cf(0);return}
  if($('#pn').classList.contains('on')){if(pcur=='toc')cf(1);else X();return}
  if(srchSaved){const o=srchSaved;srchSaved=null;restoreSearch(o);return}P('toc')};
@@ -1289,23 +1290,4 @@ if(st.br!=null){if(brOK(st.br))setBr(Math.max(.2,st.br),1);else delete st.br}
 render(st.i);
 P('toc');
 setTimeout(wgPush,800);setTimeout(wgOpen,500);
-</script><script>if('serviceWorker' in navigator&&location.protocol.indexOf('http')===0)window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));</script>
-<script>
-/* PWA: жест/кнопка «назад» работает как в приложении: закрывает окна, ведёт в оглавление, а из оглавления спрашивает про выход */
-(function(){
-  if(window.Android)return;
-  let exiting=false;
-  try{history.replaceState({r:1},'');history.pushState({r:2},'')}catch(e){}
-  window.addEventListener('popstate',function(){
-    if(exiting)return;
-    try{history.pushState({r:2},'')}catch(e){}
-    if(typeof window.onBack==='function')window.onBack();
-  });
-  window.pwaExit=function(){
-    exiting=true;
-    try{window.close()}catch(e){}
-    setTimeout(function(){try{history.go(-3)}catch(e){}},80);
-  };
-})();
-</script>
-</body></html>
+</script></body></html>
