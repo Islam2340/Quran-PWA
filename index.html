@@ -2,6 +2,10 @@
 <html lang="ru"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#fbfaf7"><title>Коран</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-180.png">
+
 <style>
 :root{box-sizing:border-box}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;margin:0}
@@ -1430,4 +1434,6 @@ if(st.br!=null){if(brOK(st.br))setBr(Math.max(.2,st.br),1);else delete st.br}
 render(st.i);
 P('toc');
 setTimeout(wgPush,800);setTimeout(wgOpen,500);
-</script></body></html>
+</script>
+<script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
+</body></html>
