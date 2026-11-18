@@ -150,7 +150,7 @@ body[data-t=news] h2,body[data-t=night] h2{text-transform:uppercase;letter-spaci
 #bi{position:fixed;top:40%;left:50%;transform:translateX(-50%);background:rgba(0,0,0,.7);color:#fff;padding:10px 18px;border-radius:16px;font-size:20px;z-index:41;opacity:0;transition:opacity .25s;pointer-events:none}
 #sb{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(40px + env(safe-area-inset-bottom,0px));background:var(--bg);color:var(--fg);border:1px solid var(--ln);border-radius:26px;padding:6px 10px;display:none;gap:6px;align-items:center;z-index:12;box-shadow:0 2px 12px rgba(0,0,0,.35);user-select:none;-webkit-user-select:none}
 .cp{width:34px;height:34px;min-width:34px;padding:0;border-radius:50%;border:1px solid var(--ln);display:flex;align-items:center;justify-content:center}.cp svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-#sb{max-width:calc(100vw - 12px)}#sb{gap:4px;padding:6px 8px}#sb .cd{width:30px;height:30px;min-width:30px}#sb .ch{white-space:nowrap;padding:0 10px}#shimg{display:block;width:100%;height:auto;border-radius:14px;margin:16px 0 8px;box-shadow:0 2px 14px rgba(0,0,0,.3)}
+#sb{max-width:calc(100vw - 12px)}#sb{gap:4px;padding:6px 8px}#sb .cd{width:30px;height:30px;min-width:30px}#sb .ch{white-space:nowrap;padding:0 10px}#shr .ch.al.on,.ch.al.on{background:color-mix(in srgb,var(--ac) 16%,transparent);color:var(--ac);border-color:var(--ac)}#shimg{display:block;width:100%;height:auto;border-radius:14px;margin:16px 0 8px;box-shadow:0 2px 14px rgba(0,0,0,.3)}
 .cd{width:34px;height:34px;min-width:34px;border-radius:50%;border:2px solid transparent;padding:0}.cd.sel{border-color:var(--fg)}
 #bk p.cy{background:rgba(255,213,79,.38)}#bk p.cg{background:rgba(129,199,132,.38)}#bk p.cr{background:rgba(239,83,80,.33)}#bk p.cb{background:rgba(100,181,246,.38)}
 #bk p[class*=" c"],#bk p.cy,#bk p.cg,#bk p.cr,#bk p.cb{border-radius:6px}
@@ -319,6 +319,8 @@ body.sbv #tb{bottom:calc(40px + env(safe-area-inset-bottom,0px) + 64px)}
 .wsw{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;width:100%}
 .wsw button{height:44px;min-width:0;border-radius:12px;border:1.5px solid var(--ln);font:600 16px Georgia,serif;padding:0}
 .wsw button.on{outline:2.5px solid var(--ac);outline-offset:2px}
+.shfr{display:flex;gap:8px;margin:0 0 10px;overflow-x:auto;scroll-snap-type:x proximity;padding:4px 4px 6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.shfr::-webkit-scrollbar{display:none}.shfb{flex:none;width:64px;height:64px;padding:0;border-radius:12px;border:1.5px solid var(--ln);overflow:hidden;background:none;scroll-snap-align:start}.shfb img{display:block;width:100%;height:100%}.shfb.on{outline:2.5px solid var(--ac);outline-offset:2px}
+#upb{display:none;position:fixed;left:10px;right:10px;bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:15;align-items:center;gap:8px;padding:10px 12px;border-radius:18px;background:var(--bg);color:var(--fg);border:1px solid var(--ln);box-shadow:0 2px 14px rgba(0,0,0,.35)}#upb .ut{flex:1;min-width:0;font-size:14px;line-height:1.3}#upb .ch{height:38px;white-space:nowrap;padding:0 12px;flex:none}.upr{height:4px;border-radius:2px;background:color-mix(in srgb,var(--fg) 18%,transparent);margin-top:6px;overflow:hidden}.upr i{display:block;height:100%;background:var(--ac)}
 
 #tsp{position:relative;width:62px;height:54px}
 #tsb{position:absolute;left:0;right:0;top:18px;height:18px;border-radius:9px;background:color-mix(in srgb,var(--ac) 22%,transparent);border:1px solid color-mix(in srgb,var(--ac) 55%,transparent);pointer-events:none}
@@ -359,12 +361,6 @@ body.sbv #tb{bottom:calc(40px + env(safe-area-inset-bottom,0px) + 64px)}
 .ntabs .ch.on{background:var(--tbon,#dcb26a);color:var(--tbonf,#1b140c);border-color:var(--tbonb,#dcb26a)}
 .ntabs .rb i{width:26px;height:20px}
 .ntabs .rb{width:44px;min-width:44px;height:40px;border-radius:13px;border:1px solid var(--tbb,rgba(227,184,102,.38));color:var(--rbc,#e3b866)}
-.ntabs{gap:6px}
-.ntabs .ch{font-size:12.5px;padding:0 2px}
-.ntabs .ch:nth-child(1){flex:1}
-.ntabs .ch:nth-child(2){flex:1.5}
-.ntabs .rb{width:40px;min-width:40px}
-.ntabs .rb i{width:22px;height:18px}
 .ntl{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;margin:0 -24px;padding:0 24px calc(14px + env(safe-area-inset-bottom,0px))}
 .ntl .grp{font-size:13px;letter-spacing:.4px;color:#e3b866;padding:16px 2px 4px;opacity:.9}
 .nr{position:relative;display:flex;align-items:center;gap:12px;padding:12px 24px;cursor:pointer;margin:0 -24px}
@@ -446,7 +442,7 @@ body[data-ks=n] #drb .dt{font:normal 600 22px Georgia,"Times New Roman",serif;co
 <button class="di" onclick="DM(0);P('theme')"><span class=dpic style="-webkit-mask-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA1NCc+PGcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48Y2lyY2xlIGN4PSczMicgY3k9JzI3JyByPScxOScvPjxwYXRoIGQ9J00zMiA4VjQ2Jy8+PHBhdGggZD0nTTM1IDE5LjBINDYuMicvPjxwYXRoIGQ9J00zNSAyNS4wSDQ3LjknLz48cGF0aCBkPSdNMzUgMzEuMEg0Ny42Jy8+PHBhdGggZD0nTTM1IDM3LjBINDUuMicvPjwvZz48L3N2Zz4=);mask-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA1NCc+PGcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48Y2lyY2xlIGN4PSczMicgY3k9JzI3JyByPScxOScvPjxwYXRoIGQ9J00zMiA4VjQ2Jy8+PHBhdGggZD0nTTM1IDE5LjBINDYuMicvPjxwYXRoIGQ9J00zNSAyNS4wSDQ3LjknLz48cGF0aCBkPSdNMzUgMzEuMEg0Ny42Jy8+PHBhdGggZD0nTTM1IDM3LjBINDUuMicvPjwvZz48L3N2Zz4=)"></span>Выбор темы</button>
 <button class="di" onclick="DM(0);P('set')"><span class=dpic style="-webkit-mask-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA1NCc+PGcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNNDcuNyAyMy44TDUyLjggMjQuNUw1Mi44IDI5LjVMNDcuNyAzMC4yTDQ1LjMgMzUuOEw0OC41IDQwLjBMNDUuMCA0My41TDQwLjggNDAuM0wzNS4yIDQyLjdMMzQuNSA0Ny44TDI5LjUgNDcuOEwyOC44IDQyLjdMMjMuMiA0MC4zTDE5LjAgNDMuNUwxNS41IDQwLjBMMTguNyAzNS44TDE2LjMgMzAuMkwxMS4yIDI5LjVMMTEuMiAyNC41TDE2LjMgMjMuOEwxOC43IDE4LjJMMTUuNSAxNC4wTDE5LjAgMTAuNUwyMy4yIDEzLjdMMjguOCAxMS4zTDI5LjUgNi4yTDM0LjUgNi4yTDM1LjIgMTEuM0w0MC44IDEzLjdMNDUuMCAxMC41TDQ4LjUgMTQuMEw0NS4zIDE4LjJaJy8+PGNpcmNsZSBjeD0nMzInIGN5PScyNycgcj0nNycvPjwvZz48L3N2Zz4=);mask-image:url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA2NCA1NCc+PGcgZmlsbD0nbm9uZScgc3Ryb2tlPScjMDAwJyBzdHJva2Utd2lkdGg9JzMuMicgc3Ryb2tlLWxpbmVjYXA9J3JvdW5kJyBzdHJva2UtbGluZWpvaW49J3JvdW5kJz48cGF0aCBkPSdNNDcuNyAyMy44TDUyLjggMjQuNUw1Mi44IDI5LjVMNDcuNyAzMC4yTDQ1LjMgMzUuOEw0OC41IDQwLjBMNDUuMCA0My41TDQwLjggNDAuM0wzNS4yIDQyLjdMMzQuNSA0Ny44TDI5LjUgNDcuOEwyOC44IDQyLjdMMjMuMiA0MC4zTDE5LjAgNDMuNUwxNS41IDQwLjBMMTguNyAzNS44TDE2LjMgMzAuMkwxMS4yIDI5LjVMMTEuMiAyNC41TDE2LjMgMjMuOEwxOC43IDE4LjJMMTUuNSAxNC4wTDE5LjAgMTAuNUwyMy4yIDEzLjdMMjguOCAxMS4zTDI5LjUgNi4yTDM0LjUgNi4yTDM1LjIgMTEuM0w0MC44IDEzLjdMNDUuMCAxMC41TDQ4LjUgMTQuMEw0NS4zIDE4LjJaJy8+PGNpcmNsZSBjeD0nMzInIGN5PScyNycgcj0nNycvPjwvZz48L3N2Zz4=)"></span>Настройки</button></div></div>
 <div id="dim"></div><div id="bi"></div>
-<div id="sb" onpointerdown="event.preventDefault()"><button class="cd" style="background:#ffd54f" onclick="CK('y')"></button><button class="cd" style="background:#81c784" onclick="CK('g')"></button><button class="cd" style="background:#ef5350" onclick="CK('r')"></button><button class="cd" style="background:#64b5f6" onclick="CK('b')"></button><button class="cp" aria-label="Копировать" onclick="CP()"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg></button><button class="cp" aria-label="Поделиться" onclick="SH()"><svg viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="18.5" r="2.6"/><path d="M8.3 10.8l7.4-4.1M8.3 13.2l7.4 4.1"/></svg></button><button class="ch" style="font-size:14px" onclick="SN()">📝 Заметка</button></div>
+<div id="upb"></div><div id="sb" onpointerdown="event.preventDefault()"><button class="cd" style="background:#ffd54f" onclick="CK('y')"></button><button class="cd" style="background:#81c784" onclick="CK('g')"></button><button class="cd" style="background:#ef5350" onclick="CK('r')"></button><button class="cd" style="background:#64b5f6" onclick="CK('b')"></button><button class="cp" aria-label="Копировать" onclick="CP()"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="11" height="11" rx="2.5"/><path d="M5 15V6.5A2.5 2.5 0 0 1 7.5 4H15"/></svg></button><button class="cp" aria-label="Поделиться" onclick="SH()"><svg viewBox="0 0 24 24"><circle cx="18" cy="5.5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="18.5" r="2.6"/><path d="M8.3 10.8l7.4-4.1M8.3 13.2l7.4 4.1"/></svg></button><button class="ch" style="font-size:14px" onclick="SN()">📝 Заметка</button></div>
 <div id="tb" onpointerdown="event.preventDefault()"><button id="tp1" class="tbb" onclick="ttsT('from')"></button><button id="tp2" class="tbb" onclick="ttsT('one')"></button><button class="tbb" onclick="ttsStop()" aria-label="Стоп"><svg viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2" fill="currentColor"/></svg></button><div id="tsp" aria-label="Скорость чтения"><div id="tsb"></div><div id="tw"></div></div></div>
 <div id="ts"></div>
 <script>
@@ -570,7 +566,7 @@ let fromToc=0;
 function PT(k){P(k);fromToc=1}
 function P(k){try{getSelection().removeAllRanges()}catch(x){}{const b=$('#sb');if(b)b.style.display='none'}
  if(!srchRestoring){srchSaved=null;snX()}fromToc=0;$('#pn').classList.toggle('card',k=='toc');$('#pb').classList.remove('sets');$('#pm').style.display=k=='toc'?'':'none';$('#pt').style.paddingLeft=k=='toc'?'0':'';
- const pb=$('#pb'),T={toc:'Оглавление',find:'Поиск',bm:'Закладки и заметки',set:'Настройки',note:'Заметка',go:'Перейти к аяту',theme:'Выбор темы',hist:'История переходов',share:'Поделиться аятом'};$('#pt').textContent=k=='toc'?'':T[k];pcur=k;$('#pn').classList.add('on');
+ const pb=$('#pb'),T={toc:'Оглавление',find:'Поиск',bm:'Закладки и заметки',set:'Настройки',note:'Заметка',go:'Перейти к аяту',theme:'Выбор темы',hist:'История переходов',share:'Поделиться'};$('#pt').textContent=k=='toc'?'':T[k];pcur=k;$('#pn').classList.add('on');
  if(k=='toc'){const hr=st.o=='h';
  const row=s=>'<div class="it tr'+(s==st.s?' cur':'')+(AUD[s]?' au':'')+'" data-s='+s+' onclick="jump('+s+',0)"><span>'+B[s][0]+'. '+esc(B[s][1])+'</span><span class=ar>'+(hr?(OI[s]+1)+' · ':'')+AR[s]+'</span></div>';
  const cb=(on,t,v)=>'<button class="ch'+(on?' on':'')+'" onclick="O(\''+v+'\')">'+t+'</button>';
@@ -588,7 +584,7 @@ function P(k){try{getSelection().removeAllRanges()}catch(x){}{const b=$('#sb');i
   pb.innerHTML='<div style="display:flex;flex-direction:column;align-items:center;gap:18px;padding-top:4px"><div id=pvw></div><div class=dm id=dm tabindex=0 role=group aria-label="Выбор темы"><i class="cap l"></i><i class="cap r"></i><div class=dbody><div class=dband></div><div class=dcyl id=tw role=listbox></div></div></div><div class=tkw><div class=tkc>Оформление оглавления и меню слева</div><div class=tks><span>Стиль</span><div class=tkg id=ksg style=\"--i:'+KSI()+'\"><i class=tkp></i><button class=\"'+(st.ks=='n'?'on':'')+'\" onclick=KS(0)>Нейтральное</button><button class=\"'+(st.ks=='g'?'on':'')+'\" onclick=KS(1)>Стекло</button></div></div><div class=\"tks'+(st.ks=='n'?' dis':'')+'\" id=tkr><span>Режим</span><div class=tkg id=tkg style=\"--i:'+TKI()+'\"><i class=tkp></i><button class=\"'+(st.tk=='d'?'on':'')+'\" onclick=TK(0)>Тёмное</button><button class=\"'+(st.tk=='l'?'on':'')+'\" onclick=TK(1)>Светлое</button><button class=\"'+(st.tk!='d'&&st.tk!='l'?'on':'')+'\" onclick=TK(2)>Как в теме</button></div></div></div><button class="ch on" style="width:100%;height:56px;border-radius:30px;font-size:19px" onclick="TA()">Применить</button></div>';
   pvSet(tsel);mkDrum('tw',TH.map((t,i)=>(i+1)+'. '+t[1]),tsel,i=>{tsel=i;pvSet(i)},i=>{tsel=i})}
 if(k=='hist'){pb.innerHTML=HI.length?HI.map((m,j)=>'<div class=it onclick="jump('+m.s+','+m.i+')"><small>'+B[m.s][0]+'. '+esc(B[m.s][1])+' · '+VN(m.s,m.i)+'</small> <span style="float:right" onclick="event.stopPropagation();hiDel('+j+')">✕</span><br>'+esc(m.x||'')+'</div>').join('')+'<div class=row style="margin-top:14px"><button class=ch onclick="hiClear()">Очистить историю</button></div>':'<div class=mu>История пока пуста. Здесь появятся места, откуда вы переходили через оглавление, поиск, закладки или «Перейти к аяту».</div>';pb.scrollTop=0}
-  if(k=='share'){pb.innerHTML=shr?'<div class=row style="margin:0"><button class="ch on" style="flex:1;height:48px" onclick="shSend(1)">Картинкой</button><button class=ch style="flex:1;height:48px" onclick="shSend(0)">Текстом</button></div><img id=shimg alt="" src="'+shr.png+'"><div id=shdw style="position:sticky;bottom:-14px;z-index:2;background:var(--bg);padding:6px 0 4px;display:flex;flex-direction:column;align-items:center"><div class=mu style="padding:0 0 2px">Размер шрифта</div><div class=dmw style="width:100%"><div class="dm sm" id=shdm tabindex=0 role=group aria-label="Размер шрифта"><div class=dbody><div class=dband></div><div class=dcyl id=shw role=listbox></div></div></div></div></div>':'<div class=mu>Нечего отправлять</div>';pb.scrollTop=0;if(shr)mkDrum('shw',SHF.map(v=>v?String(v):'Авто'),Math.max(0,SHF.indexOf(shr.fp)),null,shApply)}
+  if(k=='share'){pb.innerHTML=shr?shTop(shr.a)+'<img id=shimg alt="" src="'+shr.png+'"><div class=scard style="margin:0 0 8px"><div class=ct>Оформление картинки</div><div class=shfr id=shfr>'+shFrThumbs(shr.c,shr.b)+'</div><div class=wsw id=shsw>'+shSwHtml(shr.c)+'</div><div class=sd id=shcn style="width:100%;text-align:center;margin:8px 0 0">'+shCn(shr.c)+'</div></div><div id=shdw style="position:sticky;bottom:-14px;z-index:2;background:var(--bg);padding:6px 0 4px;display:flex;flex-direction:column;align-items:center"><div class=mu style="padding:0 0 2px">Размер шрифта</div><div class=dmw style="width:100%"><div class="dm sm" id=shdm tabindex=0 role=group aria-label="Размер шрифта"><div class=dbody><div class=dband></div><div class=dcyl id=shw role=listbox></div></div></div></div></div>':'<div class=mu>Нечего отправлять</div>';pb.scrollTop=0;if(shr)mkDrum('shw',SHF.map(v=>v?String(v):'Авто'),Math.max(0,SHF.indexOf(shr.fp)),null,shApply)}
   if(k=='set'){settingsBuild(1)}
 }
 function cap(){const r=vp.getBoundingClientRect(),d=st.mg,v=Math.round(d/2);let a=null;try{a=document.caretRangeFromPoint(r.left+d+6,r.top+v+8)}catch(e){}
@@ -846,7 +842,7 @@ function settingsBuild(reset){
   +(wn.length?'<div class=scard><div class=ct>Проверьте на слух</div><div class=sd style="width:100%;margin-bottom:8px">В этих сурах приложение не уверено в границах аятов. Прослушайте их: подсветка аята должна совпадать со звуком. Если всё верно, подтвердите, и сообщение исчезнет.</div><div class=chs>'+wn.map(n=>'<button class=ch onclick="audOk('+n+')">Сура '+n+': всё в порядке</button>').join('')+(wn.length>1?'<button class=ch onclick="audOkAll()">Подтвердить все</button>':'')+'</div></div>':'')
   +'<div class=scard><div class=ct>Как подключить</div><div class=sd style="width:100%">Положите записи сур в ZIP-архив или папку, назвав файлы по номеру суры: 61.mp3 или s061.mp3. Приложение само найдёт границы аятов (на суру уходит от нескольких секунд до минуты). Если рядом лежит файл s061.json с готовыми метками, он будет использован. Файлы копируются в память приложения, архив потом можно удалить.</div></div>'}
  if(stab=='wdg')c=wgBuild();
- if(stab=='oth')c=hd('Другое','Дополнительные параметры.')+hpCard()+dcard('Звук при кручении','sdr','Каждый вариант звучит при прокрутке — можно сразу послушать.')+card('Сброс','<button class="ch" onclick="RS()">'+(rsArm?'Нажмите ещё раз для сброса':'Сбросить настройки чтения')+'</button><div class=sd style="width:100%;margin:6px 0 0">Размер, интервал, отступы, режимы и жесты вернутся к исходным. Закладки, заметки и тема сохранятся.</div>')+(APPV?'<div class=sd style="width:100%;text-align:center;margin:12px 0 4px;opacity:.7">Коран+ · версия '+APPV+'</div>':'');
+ if(stab=='oth')c=hd('Другое','Дополнительные параметры.')+hpCard()+dcard('Звук при кручении','sdr','Каждый вариант звучит при прокрутке — можно сразу послушать.')+card('Сброс','<button class="ch" onclick="RS()">'+(rsArm?'Нажмите ещё раз для сброса':'Сбросить настройки чтения')+'</button><div class=sd style="width:100%;margin:6px 0 0">Размер, интервал, отступы, режимы и жесты вернутся к исходным. Закладки, заметки и тема сохранятся.</div>')+(updNative()?card('Обновление','<div id=updbox style="width:100%">'+updBox()+'</div>'):'')+(APPV?'<div class=sd style="width:100%;text-align:center;margin:12px 0 4px;opacity:.7">Коран+ · версия '+APPV+'</div>':'');
  pb.innerHTML='<div class=sg><div class=sn>'+STABS.map(t=>'<button class="sb'+(t[0]==stab?' on':'')+'" onclick="STab(\''+t[0]+'\')">'+t[2]+'<span>'+t[1]+'</span></button>').join('')+'</div><div class=sc>'+c+'</div></div>';
  const f1=v=>String(v);
  if(stab=='text'){stPrev();
@@ -937,27 +933,125 @@ function hiDel(j){HI.splice(j,1);hiSave();P('hist')}
 function hiClear(){HI=[];hiSave();P('hist')}
 /* ===== Поделиться аятом ===== */
 let shr=null;const SHF=[0,36,40,44,48,52,56,60,64,72,80,90];
-function shApply(i){const v=SHF[i]||0;if(!shr||shr.fp===v)return;shr.fp=v;st.shf=v;sv();shr.png=shCard(shr.t,shr.ref,v);const im=$('#shimg');if(im)im.src=shr.png}
+function shApply(i){const v=SHF[i]||0;if(!shr||shr.fp===v)return;shr.fp=v;st.shf=v;sv();shr.png=shCard(shr.t,shr.ref,v,shr.c,shr.a,shr.b);const im=$('#shimg');if(im)im.src=shr.png}
 function shText(k){const full=ttsClean(B[st.s][2][k]||'');let t=String(getSelection()||'').replace(/📝/g,'').trim();if(!t)return full;const c=ttsClean(t);return c.replace(/\s/g,'').length>=full.replace(/\s/g,'').length-4?full:c}
-function shCard(t,ref,fp){
- const th=TH.find(x=>x[0]===st.t)||TH[0],bg=th[2],fg=th[3],ac=th[4],fam=ffCss(st.ff),W=1080,PAD=100;
+/* рамки картинки: l - тонкая линия с ромбом, k - узор, f - виньетки, r - скруглённая, d - скошенные углы, e - лента из ромбов, o - вогнутые углы */
+const SHB=[['l','Тонкая линия'],['k','Узорные углы'],['f','Виньетки'],['r','Скруглённая'],['d','Скошенные углы'],['e','Лента из ромбов'],['o','Вогнутые углы']];
+function shFrame(c,W,H,ac,bg,id){
+ c.save();c.strokeStyle=ac;c.fillStyle=ac;c.lineCap='round';c.lineJoin='round';
+ const dia=(x,y,r)=>{c.beginPath();c.moveTo(x,y-r);c.lineTo(x+r,y);c.lineTo(x,y+r);c.lineTo(x-r,y);c.closePath();c.fill()};
+ const ln=(x1,y1,x2,y2,w,a)=>{c.globalAlpha=a==null?1:a;c.lineWidth=w;c.beginPath();c.moveTo(x1,y1);c.lineTo(x2,y2);c.stroke();c.globalAlpha=1};
+ const cr=(m,fn)=>{[[1,1],[-1,1],[1,-1],[-1,-1]].forEach(a=>{c.save();c.translate(a[0]>0?m:W-m,a[1]>0?m:H-m);c.scale(a[0],a[1]);fn();c.restore()})};
+ const spiral=(cx,cy,r0,r1,t0,t1,w,dots)=>{c.lineWidth=w;c.beginPath();const n=60;for(let i=0;i<=n;i++){const q=i/n,th=t0+(t1-t0)*q,r=r0+(r1-r0)*q,x=cx+r*Math.cos(th),y=cy+r*Math.sin(th);i?c.lineTo(x,y):c.moveTo(x,y)}if(dots)c.setLineDash([0.1,w*2.6]);c.stroke();c.setLineDash([])};
+ const dots=(x1,y1,x2,y2,st,r)=>{const d=Math.hypot(x2-x1,y2-y1),n=Math.round(d/st);for(let i=0;i<=n;i++){c.beginPath();c.arc(x1+(x2-x1)*i/n,y1+(y2-y1)*i/n,r,0,7);c.fill()}};
+ const bead=(x,y)=>{c.beginPath();c.arc(x,y,9,0,7);c.fill();c.fillStyle=bg;c.beginPath();c.arc(x,y,3.6,0,7);c.fill();c.fillStyle=ac};
+ const star4=(x,y,r,k)=>{c.beginPath();c.moveTo(x,y-r);c.quadraticCurveTo(x+r*k,y-r*k,x+r,y);c.quadraticCurveTo(x+r*k,y+r*k,x,y+r);c.quadraticCurveTo(x-r*k,y+r*k,x-r,y);c.quadraticCurveTo(x-r*k,y-r*k,x,y-r);c.closePath()};
+ if(id=='r'){
+  const rr=(i,r)=>{c.beginPath();c.roundRect(i,i,W-2*i,H-2*i,r);c.stroke()};
+  c.lineWidth=7;rr(40,76);c.globalAlpha=.55;c.lineWidth=2;rr(74,48);c.globalAlpha=1;
+ }else if(id=='k'){
+  const m=62,S=132,cw=W-2*m,ch=H-2*m;
+  ln(m+S,m,W-m-S,m,6);ln(m+S,H-m,W-m-S,H-m,6);ln(m,m+S,m,H-m-S,6);ln(W-m,m+S,W-m,H-m-S,6);
+  cr(m,()=>{c.lineWidth=6;c.strokeRect(0,0,S,S);c.lineWidth=3;c.strokeRect(14,14,S-28,S-28);
+   c.save();c.beginPath();c.rect(14,14,S-28,S-28);c.clip();
+   for(let i=-S;i<=S*2;i+=26){c.strokeStyle=ac;c.lineWidth=6;c.beginPath();c.moveTo(i,0);c.lineTo(i+S,S);c.stroke()}
+   for(let i=-S;i<=S*2;i+=26){c.strokeStyle=bg;c.lineWidth=12;c.beginPath();c.moveTo(i+S,0);c.lineTo(i,S);c.stroke();c.strokeStyle=ac;c.lineWidth=6;c.beginPath();c.moveTo(i+S,0);c.lineTo(i,S);c.stroke()}
+   c.restore();c.strokeStyle=bg;c.lineWidth=2;c.strokeRect(14,14,S-28,S-28);c.strokeStyle=ac;c.lineWidth=3;c.strokeRect(14,14,S-28,S-28)});
+  dia(W/2,118,12);
+ }else if(id=='f'){
+  [[80,1],[H-80,-1]].forEach(a=>{const y=a[0],k=a[1];
+   c.save();c.translate(W/2,y);c.scale(1,k);
+   [-1,1].forEach(s=>{c.save();c.scale(s,1);
+    c.beginPath();c.moveTo(W/2-70,0);c.lineTo(310,-2.6);c.lineTo(310,2.6);c.closePath();c.fill();
+    c.lineWidth=3;c.beginPath();c.moveTo(70,0);c.bezierCurveTo(115,-46,170,-40,190,-6);c.bezierCurveTo(205,18,180,28,168,14);c.stroke();
+    c.beginPath();c.moveTo(70,0);c.bezierCurveTo(115,46,170,40,190,6);c.stroke();
+    c.beginPath();c.moveTo(190,-6);c.bezierCurveTo(240,-24,270,-20,300,0);c.bezierCurveTo(270,20,240,24,190,6);c.lineWidth=2.2;c.stroke();
+    c.beginPath();c.arc(168,0,5,0,7);c.fill();c.restore()});
+   c.lineWidth=3.4;star4(0,0,66,.14);c.stroke();c.lineWidth=2;star4(0,0,44,.2);c.stroke();
+   c.globalAlpha=.7;c.setLineDash([1.5,6]);c.lineWidth=2;c.beginPath();c.arc(0,0,48,Math.PI*1.1,Math.PI*1.9);c.stroke();c.setLineDash([]);c.globalAlpha=1;
+   c.beginPath();c.arc(0,0,4,0,7);c.fill();c.restore()});
+ }else if(id=='d'){
+  const oct=(m,d,w,al)=>{c.globalAlpha=al;c.lineWidth=w;c.beginPath();c.moveTo(m+d,m);c.lineTo(W-m-d,m);c.lineTo(W-m,m+d);c.lineTo(W-m,H-m-d);c.lineTo(W-m-d,H-m);c.lineTo(m+d,H-m);c.lineTo(m,H-m-d);c.lineTo(m,m+d);c.closePath();c.stroke();c.globalAlpha=1};
+  oct(52,84,5,1);oct(76,62,2,.6);
+  [[52,52],[W-52,52],[52,H-52],[W-52,H-52]].forEach(p=>dia(p[0],p[1],13));
+ }else if(id=='e'){
+  c.lineWidth=3;c.strokeRect(46,46,W-92,H-92);c.lineWidth=2;c.globalAlpha=.7;c.strokeRect(80,80,W-160,H-160);c.globalAlpha=1;
+  const st=36;for(let x=46+st;x<W-46;x+=st){dia(x,63,8);dia(x,H-63,8)}for(let y=46+st;y<H-46;y+=st){dia(63,y,8);dia(W-63,y,8)}
+ }else if(id=='o'){
+  const path=(m,r)=>{c.beginPath();c.moveTo(m+r,m);c.lineTo(W-m-r,m);c.arc(W-m,m,r,Math.PI,Math.PI/2,true);c.lineTo(W-m,H-m-r);c.arc(W-m,H-m,r,Math.PI*1.5,Math.PI,true);c.lineTo(m+r,H-m);c.arc(m,H-m,r,0,-Math.PI/2,true);c.lineTo(m,m+r);c.arc(m,m,r,Math.PI/2,0,true);c.closePath();c.stroke()};
+  c.lineWidth=5;path(52,66);c.lineWidth=2;c.globalAlpha=.6;path(74,66);c.globalAlpha=1;
+  [[52,52],[W-52,52],[52,H-52],[W-52,H-52]].forEach(p=>{c.beginPath();c.arc(p[0],p[1],7,0,7);c.fill()});
+}else{
+  c.globalAlpha=.55;c.lineWidth=3;c.strokeRect(40,40,W-80,H-80);c.globalAlpha=1;dia(W/2,118,12);
+ }
+ c.restore()}
+function shFrThumbs(cid,fr){const th=TH.find(x=>x[0]===(cid&&cid!=='auto'?cid:st.t))||TH[0];
+ return SHB.map(b=>{const cv=document.createElement('canvas');cv.width=cv.height=1080;const c=cv.getContext('2d');c.fillStyle=th[2];c.fillRect(0,0,1080,1080);shFrame(c,1080,1080,th[4],th[2],b[0]);
+  const t=document.createElement('canvas');t.width=t.height=120;t.getContext('2d').drawImage(cv,0,0,120,120);
+  return'<button class="shfb'+((fr||'l')==b[0]?' on':'')+'" title="'+b[1]+'" aria-label="'+b[1]+'" onclick="shFr(\''+b[0]+'\')"><img alt="" src="'+t.toDataURL('image/png')+'"></button>'}).join('')}
+function shFr(id){if(!shr||shr.b===id)return;shr.b=id;st.shb=id;sv();shr.png=shCard(shr.t,shr.ref,shr.fp,shr.c,shr.a,id);
+ const im=$('#shimg');if(im)im.src=shr.png;const e=$('#shfr');if(e){const x=e.scrollLeft;e.innerHTML=shFrThumbs(shr.c,id);e.scrollLeft=x}}
+/* фон-узор тем с сеткой (как в читалке, масштаб ~2.6 к пикселям экрана) */
+function shGrid(c,W,H,id){const k=2.6;if(['gd','gm','dt','iso'].indexOf(id)<0)return;c.save();
+ const lines=(st,col,a,lw)=>{c.fillStyle=col;c.globalAlpha=a;for(let x=0;x<W;x+=st)c.fillRect(x,0,lw,H);for(let y=0;y<H;y+=st)c.fillRect(0,y,W,lw)};
+ if(id=='gd')lines(24*k,'rgb(130,160,210)',.06,k);
+ else if(id=='gm'){lines(4*k,'rgb(50,90,50)',.05,k);lines(40*k,'rgb(50,90,50)',.10,k)}
+ else if(id=='dt'){c.fillStyle='rgb(120,80,30)';c.globalAlpha=.16;c.beginPath();for(let y=12*k;y<H+24*k;y+=24*k)for(let x=12*k;x<W+24*k;x+=24*k){c.moveTo(x+1.4*k,y);c.arc(x,y,1.4*k,0,7)}c.fill()}
+ else{c.strokeStyle='rgb(120,90,40)';c.globalAlpha=.09;c.lineWidth=k;c.beginPath();const w=28*k,h=32.33*k;
+  for(let y=0;y<H+h;y+=h)for(let x=0;x<W+w;x+=w){c.moveTo(x,y);c.lineTo(x,y+h);c.moveTo(x,y);c.lineTo(x+w,y+h/2);c.moveTo(x,y+h/2);c.lineTo(x+w,y+h);c.moveTo(x,y+h);c.lineTo(x+w,y+h/2);c.moveTo(x,y+h/2);c.lineTo(x+w,y)}
+  c.stroke()}
+ c.restore()}
+function shCard(t,ref,fp,cid,al,fr){
+ const th=TH.find(x=>x[0]===(cid&&cid!=='auto'?cid:st.t))||TH[0],bg=th[2],fg=th[3],ac=th[4],fam=ffCss(st.ff),W=1080,PAD=100;
  const cv=document.createElement('canvas'),c=cv.getContext('2d');
- const wrap=fs=>{c.font=fs+'px '+fam;const mw=W-2*PAD,out=[];let cur='';for(const w of t.split(' ')){const x=cur?cur+' '+w:w;if(cur&&c.measureText(x).width>mw){out.push(cur);cur=w}else cur=x}if(cur)out.push(cur);return out};
+ const wrap=fs=>{c.font=fs+'px '+fam;const mw=W-2*PAD,out=[];for(const para of [t.replace(/\s*\n\s*/g,' ')]){let cur='';for(const w of para.split(' ')){const x=cur?cur+' '+w:w;if(cur&&c.measureText(x).width>mw){out.push(cur);cur=w}else cur=x}if(cur)out.push(cur)}return out};
  let fs=fp||62,lines=wrap(fs);if(fp){while(lines.length*fs*1.5+440>4000&&fs>30){fs-=2;lines=wrap(fs)}}else{while(lines.length*fs*1.5>900&&fs>34){fs-=2;lines=wrap(fs)}}
  const lh=fs*1.5,textH=lines.length*lh,rf=38,block=textH+34+rf,H=Math.max(1080,Math.round(block+440));
  cv.width=W;cv.height=H;
- c.fillStyle=bg;c.fillRect(0,0,W,H);
- c.strokeStyle=ac;c.globalAlpha=.55;c.lineWidth=3;c.strokeRect(40,40,W-80,H-80);c.globalAlpha=1;
- c.fillStyle=ac;c.beginPath();const cx=W/2,oy=118;c.moveTo(cx,oy-12);c.lineTo(cx+12,oy);c.lineTo(cx,oy+12);c.lineTo(cx-12,oy);c.closePath();c.fill();
+ c.fillStyle=bg;c.fillRect(0,0,W,H);shGrid(c,W,H,th[0]);
+ shFrame(c,W,H,ac,bg,fr||'l');
  let y=(H-block)/2+fs*1.05;
  c.fillStyle=fg;c.font=fs+'px '+fam;c.textBaseline='alphabetic';
- const ctr=lines.length<=10;c.textAlign=ctr?'center':'left';
- for(const l of lines){c.fillText(l,ctr?W/2:PAD,y);y+=lh}
+ c.textAlign='left';
+ const sp=c.measureText(' ').width,A=al||'j',mid=(l,y)=>{c.textAlign='center';c.fillText(l,W/2,y);c.textAlign='left'};
+ lines.forEach((l,i)=>{const last=i==lines.length-1,ws=l.split(' ');
+  if(A=='c')mid(l,y);
+  else if(!last&&ws.length>1){const tw=ws.reduce((q,w)=>q+c.measureText(w).width,0),gp=(W-2*PAD-tw)/(ws.length-1);
+   if(gp>sp*3.2){if(A=='jc')mid(l,y);else c.fillText(l,PAD,y)}else{let x=PAD;for(const w of ws){c.fillText(w,x,y);x+=c.measureText(w).width+gp}}}
+  else if(A=='jc')mid(l,y);else c.fillText(l,PAD,y);
+  y+=lh});
  y+=34-fs*0.2;
  c.fillStyle=ac;c.textAlign='center';c.font='600 '+rf+'px '+fam;c.fillText('— '+ref,W/2,y+rf*0.6);
- c.fillStyle=fg;c.globalAlpha=.5;c.font='28px '+fam;c.fillText('Коран+',W/2,H-82);c.globalAlpha=1;
+ c.fillStyle=fg;c.globalAlpha=.5;c.font='28px '+fam;c.fillText('Коран+',W/2,H-(fr=='f'?176:82));c.globalAlpha=1;
  return cv.toDataURL('image/png')}
-function SH(){if(selK==null)return;const k=selK,t=shText(k);if(!t)return;const b=B[st.s],ref='Сура '+b[0]+'. '+nc(b[1])+', '+VN(st.s,k);const fp=st.shf||0;shr={t:t,ref:ref,fp:fp,png:shCard(t,ref,fp)};P('share')}
+function shGet(){ // все выделенные аяты (абзацы) по порядку: [{k,t}]
+ const g=getSelection(),out=[];let r=null;try{if(g&&g.rangeCount&&!g.isCollapsed)r=g.getRangeAt(0)}catch(e){}
+ if(!r)return out;
+ bk.querySelectorAll('p[data-k]').forEach(p=>{if(!r.intersectsNode(p))return;
+  const k=+p.dataset.k,rr=document.createRange();rr.selectNodeContents(p);
+  if(r.compareBoundaryPoints(Range.START_TO_START,rr)>0)rr.setStart(r.startContainer,r.startOffset);
+  if(r.compareBoundaryPoints(Range.END_TO_END,rr)<0)rr.setEnd(r.endContainer,r.endOffset);
+  const d=document.createElement('div');d.appendChild(rr.cloneContents());d.querySelectorAll('.mk').forEach(x=>x.remove());
+  const c=ttsClean(d.textContent.replace(/📝/g,'')),full=ttsClean(B[st.s][2][k]||'');
+  if(!c)return;out.push({k:k,t:c.replace(/\s/g,'').length>=full.replace(/\s/g,'').length-4?full:c})});
+ return out}
+function SH(){if(selK==null)return;let a=shGet();if(!a.length){const t0=shText(selK);if(!t0)return;a=[{k:selK,t:t0}]}
+ const s0=st.s,b=B[s0],nums=[];a.forEach(x=>{(ayn(s0)[x.k]||[]).forEach(n=>nums.push(n))});
+ let vr;if(a.length==1)vr=VN(s0,a[0].k);else if(nums.length){const lo=Math.min.apply(null,nums),hi=Math.max.apply(null,nums);vr='аят '+(lo==hi?lo:lo+'–'+hi)}else vr='вступление';
+ const t=a.map(x=>x.t).join('\n'),ref='Сура '+b[0]+'. '+nc(b[1])+', '+vr,fp=st.shf||0,c=st.shc||'auto',al=st.sha||'j',fr=SHB.some(x=>x[0]===st.shb)?st.shb:'l';
+ shr={t:t,ref:ref,fp:fp,c:c,a:al,b:fr,png:shCard(t,ref,fp,c,al,fr)};P('share')}
+function shSwHtml(c){const cur=TH.find(x=>x[0]===st.t)||TH[0];
+ return['auto'].concat(TH.map(t=>t[0]).filter(i=>i!==cur[0])).map(id=>{const t=id==='auto'?cur:TH.find(x=>x[0]===id),on=(c||'auto')===id||(id==='auto'&&c===cur[0]),nm=id==='auto'?'Как в читалке (по текущей теме)':t[1];
+  return'<button class="'+(on?'on':'')+'" style="background:'+t[2]+';color:'+t[3]+'" aria-label="'+nm+'" title="'+nm+'" onclick="shSet(\''+id+'\')">'+(id==='auto'?'А':'Аа')+'</button>'}).join('')}
+function shCn(c){const cur=TH.find(x=>x[0]===st.t)||TH[0],t=TH.find(x=>x[0]===c);return!c||c==='auto'||!t?'Как в читалке: '+cur[1]:t[1]}
+const SHI='<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">';
+function shAlHtml(a){return[['c','По центру','M5 5h14M8 9.7h8M5 14.3h14M8 19h8'],['j','По краям','M4 5h16M4 9.7h16M4 14.3h16M4 19h10'],['jc','По краям, последняя строка по центру','M4 5h16M4 9.7h16M4 14.3h16M8 19h8']].map(x=>'<button class="ch al'+((a||'j')==x[0]?' on':'')+'" style="flex:1;height:46px;padding:0;display:flex;align-items:center;justify-content:center" title="'+x[1]+'" aria-label="'+x[1]+'" onclick="shAl(\''+x[0]+'\')">'+SHI+'<path d="'+x[2]+'"/></svg></button>').join('')}
+function shTop(a){const bs='flex:1;height:46px;padding:0;display:flex;align-items:center;justify-content:center';
+ return'<div class=row style="margin:0;flex-wrap:nowrap;gap:6px"><button class="ch on" style="'+bs+'" title="Отправить картинкой" aria-label="Отправить картинкой" onclick="shSend(1)">'+SHI+'<rect x="3" y="4" width="18" height="16" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M4 18l5-5 4 4 3-3 4 4"/></svg></button><button class=ch style="'+bs+'" title="Отправить текстом" aria-label="Отправить текстом" onclick="shSend(0)">'+SHI+'<path d="M5 6h14M12 6v13M9 19h6"/></svg></button><i style="width:1px;height:28px;background:var(--ln);flex:none;margin:0 4px"></i><div id=shal style="display:contents">'+shAlHtml(a)+'</div></div>'}
+function shAl(a){if(!shr||shr.a===a)return;shr.a=a;st.sha=a;sv();shr.png=shCard(shr.t,shr.ref,shr.fp,shr.c,a,shr.b);
+ const im=$('#shimg');if(im)im.src=shr.png;const e=$('#shal');if(e)e.innerHTML=shAlHtml(a)}
+function shSet(id){if(!shr)return;shr.c=id;st.shc=id;sv();shr.png=shCard(shr.t,shr.ref,shr.fp,id,shr.a,shr.b);
+ const im=$('#shimg');if(im)im.src=shr.png;const e=$('#shsw');if(e)e.innerHTML=shSwHtml(id);const n=$('#shcn');if(n)n.textContent=shCn(id);const f=$('#shfr');if(f){const x=f.scrollLeft;f.innerHTML=shFrThumbs(id,shr.b);f.scrollLeft=x}}
 function shSend(img){const r=shr;if(!r)return;const txt='«'+r.t+'»\n— '+r.ref;
  try{if(window.Android){if(img&&Android.shareImage){Android.shareImage(r.png.split(',')[1]);return}if(!img&&Android.shareText){Android.shareText(txt);return}}}catch(e){}
  try{if(navigator.share){if(img)fetch(r.png).then(x=>x.blob()).then(b=>navigator.share({files:[new File([b],'ayat.png',{type:'image/png'})]})).catch(()=>{});else navigator.share({text:txt}).catch(()=>{});return}}catch(e){}
@@ -1283,6 +1377,52 @@ if(QR){try{
  QR.addListener('progress',e=>{const el=$('#audst');if(el)el.textContent='Скопировано файлов: '+e.count+'…'});
 }catch(e){}}
 audScan();
+
+/* ===== Обновление приложения (GitHub Releases) ===== */
+const UPD_REPO='Islam2340/Quran-plus-releases';
+let UPD={st:'idle',v:'',url:'',pct:0,msg:''};
+function updNative(){return!!(window.Android&&Android.updDownload)}
+function updNum(v){return String(v||'').replace(/^v/i,'').split('.').map(x=>parseInt(x,10)||0)}
+function updNewer(a,b){const x=updNum(a),y=updNum(b),n=Math.max(x.length,y.length);for(let i=0;i<n;i++){const d=(x[i]||0)-(y[i]||0);if(d)return d>0}return false}
+async function updCheck(manual){
+ if(UPD.st=='dl'||UPD.st=='chk')return;
+ UPD={st:'chk',v:'',url:'',pct:0,msg:''};updUI();
+ try{const r=await fetch('https://api.github.com/repos/'+UPD_REPO+'/releases/latest',{headers:{Accept:'application/vnd.github+json'}});
+  if(!r.ok)throw new Error(r.status);
+  const j=await r.json(),a=(j.assets||[]).find(x=>/\.apk$/i.test(x.name||'')),v=String(j.tag_name||'').replace(/^v/i,'');
+  UPD=a&&v&&updNewer(v,APPV||APP_VER)?{st:'new',v:v,url:a.browser_download_url,pct:0,msg:''}:{st:'ok',v:v,url:'',pct:0,msg:''}
+ }catch(e){UPD={st:manual?'err':'idle',v:'',url:'',pct:0,msg:'Не удалось проверить обновления. Проверьте интернет.'}}
+ updUI()}
+function updAct(){
+ if(UPD.st=='new'||(UPD.st=='err'&&UPD.url))return updStart();
+ if(UPD.st=='ready'||UPD.st=='perm')return updInst();
+ updCheck(1)}
+function updStart(){if(!UPD.url)return;
+ if(!updNative()){window.open(UPD.url,'_blank');return}
+ UPD.st='dl';UPD.pct=0;UPD.msg='';updUI();
+ try{Android.updDownload(UPD.url)}catch(e){UPD.st='err';UPD.msg='Не удалось начать скачивание.';updUI()}}
+function updInst(){let r='';try{r=Android.updInstall()}catch(e){}
+ if(r=='perm'){UPD.st='perm';UPD.msg='Разрешите Коран+ устанавливать обновления, вернитесь в приложение и нажмите «Установить».'}
+ else if(r=='ok'){UPD.st='ready';UPD.msg=''}
+ else{UPD.st='err';UPD.msg='Файл обновления не найден. Скачайте ещё раз.'}
+ updUI()}
+window.updProg=p=>{if(UPD.st!='dl')return;UPD.pct=p;updUI()};
+window.updRes=(c,m)=>{if(c=='ready'){UPD.st='ready';updUI();updInst()}else{UPD.st='err';UPD.msg=m||'Ошибка обновления.';updUI()}};
+function updHide(){try{localStorage.setItem('updX',UPD.v)}catch(e){}updUI()}
+function updLine(){const s=UPD.st;return s=='chk'?'Проверяю обновления…':s=='ok'?'У вас последняя версия'+(APPV?' · '+APPV:''):s=='new'?'Доступна версия '+UPD.v:s=='dl'?'Скачивание'+(UPD.pct?' · '+UPD.pct+'%':'…'):s=='ready'?'Обновление скачано':(s=='perm'||s=='err')?UPD.msg:''}
+function updLbl(){const s=UPD.st;return s=='new'?'Скачать и установить':(s=='ready'||s=='perm')?'Установить':(s=='err'&&UPD.url)?'Повторить':(s=='dl'||s=='chk')?'':'Проверить обновления'}
+function updBox(){const l=updLbl(),t=updLine();
+ return(t?'<div class=sd style="width:100%;text-align:center;margin:0 0 8px">'+esc(t)+'</div>':'')+(UPD.st=='dl'?'<div class=upr style="margin:0 0 8px"><i style="width:'+(UPD.pct||4)+'%"></i></div>':'')+(l?'<button class="ch on" style="width:100%;height:44px" onclick="updAct()">'+l+'</button>':'')}
+function updUI(){
+ const b=$('#updbox');if(b)b.innerHTML=updBox();
+ const n=$('#upb');if(!n)return;
+ let x='';try{x=localStorage.getItem('updX')||''}catch(e){}
+ const s=UPD.st,show=updNative()&&(s=='dl'||s=='ready'||s=='perm'||(s=='err'&&UPD.url)||(s=='new'&&x!==UPD.v));
+ if(!show){n.style.display='none';return}
+ const l=updLbl();
+ n.innerHTML='<div class=ut>'+esc(s=='new'?'Доступно обновление '+UPD.v:updLine())+(s=='dl'?'<div class=upr><i style="width:'+(UPD.pct||4)+'%"></i></div>':'')+'</div>'+(l?'<button class="ch on" onclick="updAct()">'+(s=='new'?'Обновить':l)+'</button>':'')+(s=='new'?'<button class="ch" aria-label="Скрыть" onclick="updHide()">✕</button>':'');
+ n.style.display='flex'}
+setTimeout(()=>{if(updNative())updCheck(0)},4000);
 
 addEventListener('pagehide',()=>{try{TTS&&TTS.cancel()}catch(e){}});
 ttsUI();
