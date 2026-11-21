@@ -1437,7 +1437,7 @@ setTimeout(wgPush,800);setTimeout(wgOpen,500);
 
 /* ===== Кнопка «Обновление» (PWA) =====
    PWA_VER должен совпадать с номером в sw.js: const C='quran-vN' */
-window.PWA_VER='5';
+window.PWA_VER='6';
 let pwaSt='',pwaForce=0;
 function pwaLine(){return pwaSt||('Версия '+(APPV||APP_VER)+' · сборка '+PWA_VER)}
 async function pwaUpd(){
@@ -1467,30 +1467,43 @@ async function pwaUpd(){
    Использует уже готовый window.onBack (его же вызывает Android-обёртка). */
 (function(){
  if(window.Android||!window.history||!history.pushState)return;
- let armed=0,leaving=0;
- function arm(){
-  if(armed)return;
-  try{history.replaceState({qg:0},'');history.pushState({qg:1},'');armed=1}catch(e){}
+ const N=3;let armed=0,leaving=0,cur=0,tt;
+ /* держим несколько запасных записей истории; пополняем при каждом касании,
+    потому что записи, добавленные без касания, Chrome пропускает */
+ function fill(){
+  try{
+   if(!armed){history.replaceState({qg:0},'');cur=0;armed=1}
+   while(cur<N){history.pushState({qg:cur+1},'');cur++}
+  }catch(e){}
  }
- /* запись добавляем после завершения касания: только тогда Chrome считает это действием пользователя */
- ['pointerup','touchend','click','keydown'].forEach(ev=>addEventListener(ev,arm,{passive:true,capture:true}));
+ function hideT(){const d=document.getElementById('pwatoast');if(d)d.style.display='none'}
+ function toast(m){
+  let d=document.getElementById('pwatoast');
+  if(!d){d=document.createElement('div');d.id='pwatoast';
+   d.style.cssText='position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:rgba(0,0,0,.82);color:#fff;padding:10px 16px;border-radius:12px;font-size:14px;z-index:99999;max-width:90vw;text-align:center';
+   document.body.appendChild(d)}
+  d.textContent=m;d.style.display='block';clearTimeout(tt);tt=setTimeout(hideT,4000);
+ }
+ function wake(){if(leaving){leaving=0;hideT()}fill()}
+ ['pointerup','touchend','click','keydown'].forEach(ev=>addEventListener(ev,wake,{passive:true,capture:true}));
  addEventListener('popstate',e=>{
-  if(!armed||leaving)return;
+  if(!armed)return;
   const q=e.state&&e.state.qg;
-  if(q===0){ /* нажали «Назад» — мы на нижней записи */
-   try{window.onBack&&window.onBack()}catch(x){}
-   try{history.pushState({qg:1},'')}catch(x){}
-  }
+  if(typeof q!=='number')return;
+  const back=q<cur;cur=q;
+  if(leaving||!back)return;
+  try{window.onBack&&window.onBack()}catch(x){}
+  fill();
  });
  window.pwaExit=function(){
   if(!armed){try{window.close()}catch(e){}return}
   leaving=1;
-  try{history.go(-2)}catch(e){}   /* уходим за пределы приложения */
+  try{history.go(-(cur+1))}catch(e){}   /* вкладка браузера: уходим на прошлую страницу */
   setTimeout(()=>{try{window.close()}catch(e){}},150);
-  setTimeout(()=>{ /* выйти не удалось (например, iOS) — остаёмся в приложении */
-   leaving=0;
-   if(history.state&&history.state.qg===0){try{history.pushState({qg:1},'')}catch(e){}}
-  },500);
+  setTimeout(()=>{ /* установленное PWA: уходим на нижнюю запись, следующий «Назад» закроет приложение */
+   if(cur>0){try{history.go(-cur)}catch(e){}}
+   toast('Нажмите «Назад» ещё раз, чтобы выйти');
+  },600);
  };
 })();
 </script>
