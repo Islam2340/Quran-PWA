@@ -1445,7 +1445,7 @@ setTimeout(wgPush,800);setTimeout(wgOpen,500);
 
 /* ===== Кнопка «Обновление» (PWA) =====
    PWA_VER должен совпадать с номером в sw.js: const C='quran-vN' */
-window.PWA_VER='7';
+window.PWA_VER='8';
 let pwaSt='',pwaForce=0;
 function pwaLine(){return pwaSt||('Версия '+(APPV||APP_VER)+' · сборка '+PWA_VER)}
 async function pwaUpd(){
@@ -1475,6 +1475,25 @@ async function pwaUpd(){
    Использует уже готовый window.onBack (его же вызывает Android-обёртка). */
 (function(){
  if(window.Android||!window.history||!history.pushState)return;
+ /* iPhone/iPad: системный свайп-назад даёт паузу с пустым экраном, поэтому историю не трогаем,
+    а «Назад» делаем своим свайпом от левого края — оглавление открывается сразу */
+ const IOS=/iPad|iPhone|iPod/.test(navigator.userAgent)||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1);
+ if(IOS){
+  let sx=-1,sy=0;
+  addEventListener('pointerdown',e=>{sx=e.clientX<=30?e.clientX:-1;sy=e.clientY},{capture:true,passive:true});
+  addEventListener('pointercancel',()=>{sx=-1},{capture:true,passive:true});
+  addEventListener('pointerup',e=>{
+   if(sx<0)return;
+   const dx=e.clientX-sx,dy=e.clientY-sy;sx=-1;
+   if(dx>70&&Math.abs(dy)<dx*.6){
+    e.stopPropagation(); /* чтобы читалка не листала страницу */
+    const pn=document.getElementById('pn');
+    if(pn&&pn.classList.contains('on')&&typeof pcur!=='undefined'&&pcur=='toc')return; /* в оглавлении на iPhone выходить некуда */
+    try{window.onBack&&window.onBack()}catch(x){}
+   }
+  },{capture:true});
+  return;
+ }
  const N=3;let armed=0,leaving=0,cur=0,tt;
  /* держим несколько запасных записей истории; пополняем при каждом касании,
     потому что записи, добавленные без касания, Chrome пропускает */
