@@ -1437,7 +1437,7 @@ setTimeout(wgPush,800);setTimeout(wgOpen,500);
 
 /* ===== Кнопка «Обновление» (PWA) =====
    PWA_VER должен совпадать с номером в sw.js: const C='quran-vN' */
-window.PWA_VER='4';
+window.PWA_VER='5';
 let pwaSt='',pwaForce=0;
 function pwaLine(){return pwaSt||('Версия '+(APPV||APP_VER)+' · сборка '+PWA_VER)}
 async function pwaUpd(){
@@ -1472,8 +1472,8 @@ async function pwaUpd(){
   if(armed)return;
   try{history.replaceState({qg:0},'');history.pushState({qg:1},'');armed=1}catch(e){}
  }
- /* запись в историю добавляем после первого касания (иначе Chrome её пропускает) */
- ['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,arm,{once:true,passive:true,capture:true}));
+ /* запись добавляем после завершения касания: только тогда Chrome считает это действием пользователя */
+ ['pointerup','touchend','click','keydown'].forEach(ev=>addEventListener(ev,arm,{passive:true,capture:true}));
  addEventListener('popstate',e=>{
   if(!armed||leaving)return;
   const q=e.state&&e.state.qg;
