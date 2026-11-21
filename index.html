@@ -666,7 +666,7 @@ function DM(v){$('#dr').classList.toggle('on',!!v)}
 document.addEventListener('click',e=>{if(e.target.closest&&e.target.closest('#drb .di'))softVibe()},true);
 function RND(){const tot=cum[113]+B[113][2].length,r=new Uint32Array(1);crypto.getRandomValues(r);const x=r[0]%tot;let s=0;while(s<113&&x>=cum[s+1])s++;const k=x-cum[s];softVibe();jump(s,k);toast('Сура '+B[s][0]+' · '+VN(s,k))}
 function O(v){st.o=v;sv();P('toc');$('#pb').scrollTop=0}
-function cf(s){let e=$('#cf');if(!e){e=document.createElement('div');e.id='cf';e.innerHTML='<div class=bx><p>Выйти из приложения?</p><div class=row><button class="ch on" onclick="cf(0);if(window.Android)Android.exit()">Выйти</button><button class=ch onclick="cf(0)">Остаться</button></div></div>';document.body.appendChild(e)}e.style.display=s?'flex':'none'}
+function cf(s){let e=$('#cf');if(!e){e=document.createElement('div');e.id='cf';e.innerHTML='<div class=bx><p>Выйти из приложения?</p><div class=row><button class="ch on" onclick="cf(0);if(window.Android)Android.exit();else if(window.pwaExit)pwaExit()">Выйти</button><button class=ch onclick="cf(0)">Остаться</button></div></div>';document.body.appendChild(e)}e.style.display=s?'flex':'none'}
 window.onBack=function(){if($('#dr').classList.contains('on')){DM(0);return}const e=$('#cf');if(e&&e.style.display=='flex'){cf(0);return}
  if($('#pn').classList.contains('on')){if(pcur=='toc')cf(1);else X();return}
  if(srchSaved){const o=srchSaved;srchSaved=null;restoreSearch(o);return}P('toc')};
@@ -846,7 +846,7 @@ function settingsBuild(reset){
   +(wn.length?'<div class=scard><div class=ct>Проверьте на слух</div><div class=sd style="width:100%;margin-bottom:8px">В этих сурах приложение не уверено в границах аятов. Прослушайте их: подсветка аята должна совпадать со звуком. Если всё верно, подтвердите, и сообщение исчезнет.</div><div class=chs>'+wn.map(n=>'<button class=ch onclick="audOk('+n+')">Сура '+n+': всё в порядке</button>').join('')+(wn.length>1?'<button class=ch onclick="audOkAll()">Подтвердить все</button>':'')+'</div></div>':'')
   +'<div class=scard><div class=ct>Как подключить</div><div class=sd style="width:100%">Положите записи сур в ZIP-архив или папку, назвав файлы по номеру суры: 61.mp3 или s061.mp3. Приложение само найдёт границы аятов (на суру уходит от нескольких секунд до минуты). Если рядом лежит файл s061.json с готовыми метками, он будет использован. Файлы копируются в память приложения, архив потом можно удалить.</div></div>'}
  if(stab=='wdg')c=wgBuild();
- if(stab=='oth')c=hd('Другое','Дополнительные параметры.')+hpCard()+dcard('Звук при кручении','sdr','Каждый вариант звучит при прокрутке — можно сразу послушать.')+card('Сброс','<button class="ch" onclick="RS()">'+(rsArm?'Нажмите ещё раз для сброса':'Сбросить настройки чтения')+'</button><div class=sd style="width:100%;margin:6px 0 0">Размер, интервал, отступы, режимы и жесты вернутся к исходным. Закладки, заметки и тема сохранятся.</div>')+(updNative()?card('Обновление','<div id=updbox style="width:100%">'+updBox()+'</div>'):'')+(APPV?'<div class=sd style="width:100%;text-align:center;margin:12px 0 4px;opacity:.7">Коран+ · версия '+APPV+'</div>':'');
+ if(stab=='oth')c=hd('Другое','Дополнительные параметры.')+hpCard()+dcard('Звук при кручении','sdr','Каждый вариант звучит при прокрутке — можно сразу послушать.')+card('Сброс','<button class="ch" onclick="RS()">'+(rsArm?'Нажмите ещё раз для сброса':'Сбросить настройки чтения')+'</button><div class=sd style="width:100%;margin:6px 0 0">Размер, интервал, отступы, режимы и жесты вернутся к исходным. Закладки, заметки и тема сохранятся.</div>')+(updNative()?card('Обновление','<div id=updbox style="width:100%">'+updBox()+'</div>'):'')+(!updNative()&&window.PWA_VER?card('Обновление','<div id=pwat class=sd style="width:100%;text-align:center;margin:0 0 8px">'+pwaLine()+'</div><button id=pwab class="ch on" style="width:100%;height:44px" onclick="pwaUpd()">'+(pwaForce?'Обновить принудительно':'Проверить обновление')+'</button>'):'')+(APPV?'<div class=sd style="width:100%;text-align:center;margin:12px 0 4px;opacity:.7">Коран+ · версия '+APPV+'</div>':'');
  pb.innerHTML='<div class=sg><div class=sn>'+STABS.map(t=>'<button class="sb'+(t[0]==stab?' on':'')+'" onclick="STab(\''+t[0]+'\')">'+t[2]+'<span>'+t[1]+'</span></button>').join('')+'</div><div class=sc>'+c+'</div></div>';
  const f1=v=>String(v);
  if(stab=='text'){stPrev();
@@ -1434,6 +1434,65 @@ if(st.br!=null){if(brOK(st.br))setBr(Math.max(.2,st.br),1);else delete st.br}
 render(st.i);
 P('toc');
 setTimeout(wgPush,800);setTimeout(wgOpen,500);
+
+/* ===== Кнопка «Обновление» (PWA) =====
+   PWA_VER должен совпадать с номером в sw.js: const C='quran-vN' */
+window.PWA_VER='4';
+let pwaSt='',pwaForce=0;
+function pwaLine(){return pwaSt||('Версия '+(APPV||APP_VER)+' · сборка '+PWA_VER)}
+async function pwaUpd(){
+ const t=$('#pwat'),b=$('#pwab'),say=x=>{pwaSt=x;if(t)t.textContent=x},fin=()=>{if(b){b.disabled=false;b.textContent=pwaForce?'Обновить принудительно':'Проверить обновление'}};
+ if(b)b.disabled=true;
+ try{
+  if(!pwaForce){
+   say('Проверяю обновления…');
+   let v='';
+   try{
+    const r=await fetch('sw.js?'+Date.now(),{cache:'no-store'});
+    if(!r.ok)throw 0;
+    const m=/const\s+C\s*=\s*['"]quran-v(\d+)/.exec(await r.text());v=m?m[1]:'';
+   }catch(e){say('Нет соединения. Проверьте интернет.');fin();return}
+   if(v&&v===PWA_VER){say('У вас последняя версия · сборка '+PWA_VER);pwaForce=1;fin();return}
+   say('Найдена новая версия'+(v?' '+v:'')+'. Обновляю…');
+  }else say('Обновляю…');
+  try{const reg=await navigator.serviceWorker.getRegistration();if(reg)await reg.update()}catch(e){}
+  try{const k=await caches.keys();await Promise.all(k.map(x=>caches.delete(x)))}catch(e){}
+  pwaSt='';pwaForce=0;
+  setTimeout(()=>location.reload(),300);
+ }catch(e){say('Не удалось обновить. Попробуйте ещё раз.');fin()}
+}
+
+/* ===== «Назад» / свайп-назад в PWA =====
+   сура → оглавление → подтверждение выхода.
+   Использует уже готовый window.onBack (его же вызывает Android-обёртка). */
+(function(){
+ if(window.Android||!window.history||!history.pushState)return;
+ let armed=0,leaving=0;
+ function arm(){
+  if(armed)return;
+  try{history.replaceState({qg:0},'');history.pushState({qg:1},'');armed=1}catch(e){}
+ }
+ /* запись в историю добавляем после первого касания (иначе Chrome её пропускает) */
+ ['pointerdown','touchstart','keydown'].forEach(ev=>addEventListener(ev,arm,{once:true,passive:true,capture:true}));
+ addEventListener('popstate',e=>{
+  if(!armed||leaving)return;
+  const q=e.state&&e.state.qg;
+  if(q===0){ /* нажали «Назад» — мы на нижней записи */
+   try{window.onBack&&window.onBack()}catch(x){}
+   try{history.pushState({qg:1},'')}catch(x){}
+  }
+ });
+ window.pwaExit=function(){
+  if(!armed){try{window.close()}catch(e){}return}
+  leaving=1;
+  try{history.go(-2)}catch(e){}   /* уходим за пределы приложения */
+  setTimeout(()=>{try{window.close()}catch(e){}},150);
+  setTimeout(()=>{ /* выйти не удалось (например, iOS) — остаёмся в приложении */
+   leaving=0;
+   if(history.state&&history.state.qg===0){try{history.pushState({qg:1},'')}catch(e){}}
+  },500);
+ };
+})();
 </script>
 <script>if("serviceWorker" in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script>
 </body></html>
