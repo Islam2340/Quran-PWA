@@ -453,12 +453,14 @@ body[data-ks=n] #drb .dt{font:normal 600 22px Georgia,"Times New Roman",serif;co
 .mzlg{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:13px;color:var(--fg);margin:0 0 12px}
 .mzlg i{display:inline-block;width:11px;height:11px;border-radius:3px;margin-right:5px;vertical-align:-1px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.28)}
 .mzlg i.g{background:var(--mg)}.mzlg i.y{background:var(--my)}.mzlg i.r{background:var(--mr)}.mzlg i.n{background:color-mix(in srgb,var(--fg) 22%,var(--bg))}
-.mzr{display:flex;gap:3px;height:140px;padding:7px 6px 0;margin:0 0 6px;border-radius:6px 6px 0 0;background:color-mix(in srgb,var(--fg) 8%,var(--bg));border-bottom:8px solid color-mix(in srgb,var(--ac) 65%,var(--bg))}
+.mzr{display:flex;gap:3px;height:118px;padding:7px 6px 0;margin:0 0 6px;border-radius:6px 6px 0 0;background:color-mix(in srgb,var(--fg) 8%,var(--bg));border-bottom:8px solid color-mix(in srgb,var(--ac) 65%,var(--bg))}
 .mzx{flex:1.1;min-width:0}
 .mzp{position:relative;flex:1;min-width:0;height:100%;padding:0;border-radius:3px 3px 0 0;overflow:hidden;background:color-mix(in srgb,var(--fg) 22%,var(--bg));box-shadow:inset 0 0 0 1px rgba(0,0,0,.22);color:var(--fg);font-size:11px;line-height:1}
 .mzp.g{background:var(--mg);color:#14210f}.mzp.y{background:var(--my);color:#1f1a05}.mzp.r{background:var(--mr);color:#2a0b0a}
 .mzp i{position:absolute;left:0;right:0;bottom:0;background:var(--mg)}
-.mzp b{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding:6px 0;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:500;white-space:nowrap;overflow:hidden}
+.mzp b{position:absolute;inset:0;display:flex;align-items:center;justify-content:flex-start;padding:6px 0;writing-mode:vertical-rl;transform:rotate(180deg);font-weight:500;overflow:hidden}
+.mzp b span{display:block;max-height:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mzp b.sm{font-size:9px}
 .mzh2{font-size:13px;color:var(--fg);opacity:.75;margin:6px 0 4px;line-height:1.4}
 .mzn{display:flex;align-items:center;gap:8px;margin:0 0 10px}.mzn .sp{flex:1}
 .mzn .ch{flex:none}
@@ -467,6 +469,7 @@ body[data-ks=n] #drb .dt{font:normal 600 22px Georgia,"Times New Roman",serif;co
 .mzbar i{display:block;height:100%;background:var(--mb);transition:width .25s}
 .mzbt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
 .mzbt .ch{width:100%;padding:0 8px;font-size:14px}
+.mzbt .wd{grid-column:1/-1}
 .mzc{border:1.5px solid var(--ln);border-radius:12px;padding:10px 12px;margin:0 0 8px;background:color-mix(in srgb,var(--fg) 4%,var(--bg));color:var(--fg)}
 .mzc.g{border-color:var(--mb);background:color-mix(in srgb,var(--mg) 24%,var(--bg))}
 .mzc.r{border-color:var(--mrb);background:color-mix(in srgb,var(--mr) 22%,var(--bg))}
@@ -477,7 +480,13 @@ body[data-ks=n] #drb .dt{font:normal 600 22px Georgia,"Times New Roman",serif;co
 .mzk.g.on{background:var(--mg);border-color:var(--mb);color:#14210f}
 .mzk.r.on{background:var(--mr);border-color:var(--mrb);color:#2a0b0a}
 .mztx{font-family:var(--mzff,inherit);font-size:var(--mzfs,19px);line-height:var(--mzlh,1.6);color:var(--fg)}
-.mztx.hid{font-family:inherit;font-size:14px;font-style:italic;opacity:.65;padding:8px 0}
+.mztx.hid{cursor:pointer;user-select:none;-webkit-user-select:none;color:transparent;-webkit-text-fill-color:transparent;-webkit-tap-highlight-color:transparent}
+.mztx.hid .dst{background-image:var(--mzdust,none),var(--mzdust,none),var(--mzdust,none);background-size:128px 128px,96px 96px,160px 160px;background-position:0 0,0 0,0 0;padding:calc((var(--mzlh,1.6) - 1.15)*.5em) 0;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:mzd 14s linear infinite}
+.mztx.hid .dst *{color:transparent!important;-webkit-text-fill-color:transparent!important;background:none!important}
+@keyframes mzd{to{background-position:128px 128px,0 -96px,-160px 0}}
+.mztx.rv{animation:mzf .45s ease-out}
+@keyframes mzf{from{opacity:0;filter:blur(5px)}to{opacity:1;filter:none}}
+@media (prefers-reduced-motion:reduce){.mztx.hid .dst,.mztx.rv{animation:none}}
 .mzin{font-size:14px;text-align:center;color:var(--fg);opacity:.65;margin:0 0 10px}
 .mzdl{flex:1;min-width:0;text-align:left}
 .mzdl small{font-size:15px;opacity:.8}
@@ -739,24 +748,26 @@ function memShelf(){
   for(let s=r;s<r+12;s++){
    if(s>113){h+='<div class=mzx></div>';continue}
    const c=mzCnt(s),q=mzSt(c),f=q=='g'?100:(c.t?Math.round(c.g/c.t*100):0),pc=c.t?Math.round(c.g/c.t*100):0;
-   h+='<button class="mzp '+q+'" style="flex:'+(1+Math.min(c.t,250)/400).toFixed(2)+'" onclick="memOpenS('+s+')" aria-label="Сура '+(s+1)+', '+esc(AR[s])+', выучено '+pc+'%">'+(q=='y'||q=='r'?'<i style="height:'+f+'%"></i>':'')+'<b>'+(s+1)+'. '+esc(AR[s])+'</b></button>'}
+   const lb=(s+1)+'. '+dn(s);
+   h+='<button class="mzp '+q+'" style="flex:'+(1+Math.min(c.t,250)/400).toFixed(2)+'" onclick="memOpenS('+s+')" aria-label="Сура '+(s+1)+', '+esc(dn(s))+', выучено '+pc+'%">'+(q=='y'||q=='r'?'<i style="height:'+f+'%"></i>':'')+'<b'+(lb.length>16?' class=sm':'')+'><span>'+esc(lb)+'</span></b></button>'}
   h+='</div>'}
  h+='<div class=mzh2>Нажмите на книгу, чтобы открыть суру: читайте аяты и отмечайте выученные.</div>';
  pb.innerHTML=h}
 function memOpenS(s){if(s<0||s>113)return;if(memS<0)memSc=$('#pb').scrollTop;memS=s;mzRev={};memSurah(s)}
 function memBack(){memS=-1;$('#pt').textContent='Заучивание';memShelf();$('#pb').scrollTop=memSc}
-function memHead(s){const c=mzCnt(s),p=c.t?Math.round(c.g/c.t*100):0,all=c.t&&c.g==c.t;
- return '<div class=mzr1><span>'+c.g+' из '+c.t+' аятов</span><span>'+p+'%</span></div><div class=mzbar><i style="width:'+p+'%"></i></div><div class=mzbt><button class=ch onclick="memAll('+s+')">'+(all?'Снять все отметки':'Вся сура выучена')+'</button><button class="ch'+(st.mzh?' on':'')+'" onclick="memHide()">'+(st.mzh?'Показать текст':'Скрыть текст')+'</button></div>'}
+function memHead(s){const c=mzCnt(s),p=c.t?Math.round(c.g/c.t*100):0,u=mzU(s),aG=u.length&&u.every(k=>mzGet(s,k)==1),aR=u.length&&u.every(k=>mzGet(s,k)==2);
+ return '<div class=mzr1><span>'+c.g+' из '+c.t+' аятов</span><span>'+p+'%</span></div><div class=mzbar><i style="width:'+p+'%"></i></div><div class=mzbt><button class="ch'+(aG?' on':'')+'" onclick="memAll('+s+',1)">Вся сура выучена</button><button class="ch'+(aR?' on':'')+'" onclick="memAll('+s+',2)">Вся сура: повторить</button><button class="ch wd'+(st.mzh?' on':'')+'" onclick="memHide()">'+(st.mzh?'Показать текст':'Скрыть текст')+'</button></div>'}
 function memCard(s,k){const p=B[s][2][k],n=ayn(s)[k];
  if(!n.length)return '<div class=mzin id="mzc'+k+'">'+fmt(p)+'</div>';
  const x=mzGet(s,k),hid=st.mzh&&!mzRev[k];
- return '<div class="mzc'+(x==1?' g':x==2?' r':'')+'" id="mzc'+k+'"><div class=mzcb><small>'+VN(s,k)+'</small><div class=mzbn><button class="mzk r'+(x==2?' on':'')+'" onclick="memMark('+s+','+k+',2)">Повторить</button><button class="mzk g'+(x==1?' on':'')+'" onclick="memMark('+s+','+k+',1)">Выучил</button></div></div><div class="mztx'+(hid?' hid':'')+'" onclick="memRev('+s+','+k+')">'+(hid?'Нажмите, чтобы показать аят':fmt(p))+'</div></div>'}
+ return '<div class="mzc'+(x==1?' g':x==2?' r':'')+'" id="mzc'+k+'"><div class=mzcb><small>'+VN(s,k)+'</small><div class=mzbn><button class="mzk r'+(x==2?' on':'')+'" onclick="memMark('+s+','+k+',2)">Повторить</button><button class="mzk g'+(x==1?' on':'')+'" onclick="memMark('+s+','+k+',1)">Выучил</button></div></div><div class="mztx'+(hid?' hid':'')+'" onclick="memRev('+s+','+k+')">'+(hid?'<span class=dst>'+fmt(p)+'</span>':fmt(p))+'</div></div>'}
+function mzDust(){try{const z=2,c=document.createElement('canvas');c.width=c.height=128*z;const x=c.getContext('2d'),m=(getComputedStyle($('#pb')).color.match(/[\d.]+/g)||[0,0,0]).map(Number);for(let i=0;i<720;i++){x.fillStyle='rgba('+Math.round(m[0])+','+Math.round(m[1])+','+Math.round(m[2])+','+(.35+Math.random()*.65).toFixed(2)+')';x.beginPath();x.arc(Math.random()*128*z,Math.random()*128*z,(.5+Math.random()*.3)*z,0,6.2832);x.fill()}return 'url('+c.toDataURL()+')'}catch(e){return 'none'}}
 function memSurah(s,keep){
  const pb=$('#pb'),sc=pb.scrollTop;
- pb.style.setProperty('--mzfs',Math.min(24,Math.max(16,st.fs||20))+'px');pb.style.setProperty('--mzff',ffCss(st.ff));pb.style.setProperty('--mzlh',st.lh||1.6);
- $('#pt').textContent=B[s][0]+'. '+AR[s];
+ pb.style.setProperty('--mzfs',Math.min(24,Math.max(16,st.fs||20))+'px');pb.style.setProperty('--mzff',ffCss(st.ff));pb.style.setProperty('--mzlh',st.lh||1.6);if(st.mzh)pb.style.setProperty('--mzdust',mzDust());
+ $('#pt').textContent=B[s][0]+'. '+dn(s);
  let h='<div class=mzn><button class=ch onclick="memBack()">‹ К полке</button><span class=sp></span><button class=ch onclick="memOpenS('+(s-1)+')" aria-label="Предыдущая сура"'+(s<1?' style="visibility:hidden"':'')+'>←</button><button class=ch onclick="memOpenS('+(s+1)+')" aria-label="Следующая сура"'+(s>112?' style="visibility:hidden"':'')+'>→</button></div><div id=mzhd>'+memHead(s)+'</div>';
- h+='<div class=mzh2 style="margin:0 0 10px">Читайте аят, повторяйте и нажимайте «Выучил». «Скрыть текст» поможет проверить себя по памяти.</div>';
+ h+='<div class=mzh2 style="margin:0 0 10px">Читайте аят, повторяйте и нажимайте «Выучил». «Скрыть текст» закроет аяты мерцающей пылью, как спойлер в Телеграме: вспомните аят и нажмите на него, чтобы открыть.</div>';
  for(let k=0;k<B[s][2].length;k++)h+=memCard(s,k);
  h+='<div class=mzn style="margin-top:14px"><button class=ch onclick="jump('+s+',0)">Открыть суру в книге</button></div>';
  pb.innerHTML=h;
@@ -764,9 +775,9 @@ function memSurah(s,keep){
  pb.scrollTop=0;const c=mzCnt(s);
  if(c.g&&c.g<c.t){const u=mzU(s).find(k=>mzGet(s,k)!=1),e=u!=null&&document.getElementById('mzc'+u);if(e)pb.scrollTop=Math.max(0,pb.scrollTop+e.getBoundingClientRect().top-pb.getBoundingClientRect().top-90)}}
 function memMark(s,k,x){mzSet(s,k,mzGet(s,k)==x?0:x);sv();const e=document.getElementById('mzc'+k);if(e)e.outerHTML=memCard(s,k);const hd=$('#mzhd');if(hd)hd.innerHTML=memHead(s)}
-function memRev(s,k){if(!st.mzh)return;mzRev[k]=!mzRev[k];const e=document.getElementById('mzc'+k);if(e)e.outerHTML=memCard(s,k)}
+function memRev(s,k){if(!st.mzh)return;mzRev[k]=!mzRev[k];const e=document.getElementById('mzc'+k);if(e){e.outerHTML=memCard(s,k);if(mzRev[k]){const t=document.querySelector('#mzc'+k+' .mztx');if(t)t.classList.add('rv')}}}
 function memHide(){st.mzh=st.mzh?0:1;mzRev={};sv();if(memS>=0)memSurah(memS,1)}
-function memAll(s){const c=mzCnt(s),all=c.t&&c.g==c.t;if(all&&!confirm('Снять все отметки в этой суре?'))return;for(const k of mzU(s))mzSet(s,k,all?0:1);sv();memSurah(s,1)}
+function memAll(s,x){const u=mzU(s),same=u.every(k=>mzGet(s,k)==x);for(const k of u)mzSet(s,k,same?0:x);sv();memSurah(s,1);toast(same?'Отметки сняты':x==1?'Вся сура отмечена выученной':'Вся сура отмечена: повторить')}
 
 window.onBack=function(){if($('#dr').classList.contains('on')){DM(0);return}const e=$('#cf');if(e&&e.style.display=='flex'){cf(0);return}
  if($('#pn').classList.contains('on')){if(pcur=='mem'&&memS>=0){memBack();return}if(pcur=='toc')cf(1);else X();return}
