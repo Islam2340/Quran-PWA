@@ -760,8 +760,9 @@ function memHead(s){const c=mzCnt(s),p=c.t?Math.round(c.g/c.t*100):0,u=mzU(s),aG
 function memCard(s,k){const p=B[s][2][k],n=ayn(s)[k];
  if(!n.length)return '<div class=mzin id="mzc'+k+'">'+fmt(p)+'</div>';
  const x=mzGet(s,k),hid=st.mzh&&!mzRev[k];
- return '<div class="mzc'+(x==1?' g':x==2?' r':'')+'" id="mzc'+k+'"><div class=mzcb><small>'+VN(s,k)+'</small><div class=mzbn><button class="mzk r'+(x==2?' on':'')+'" onclick="memMark('+s+','+k+',2)">Повторить</button><button class="mzk g'+(x==1?' on':'')+'" onclick="memMark('+s+','+k+',1)">Выучил</button></div></div><div class="mztx'+(hid?' hid':'')+'" onclick="memRev('+s+','+k+')">'+(hid?'<span class=dst>'+fmt(p)+'</span>':fmt(p))+'</div></div>'}
-function mzDust(){try{const z=2,c=document.createElement('canvas');c.width=c.height=128*z;const x=c.getContext('2d'),m=(getComputedStyle($('#pb')).color.match(/[\d.]+/g)||[0,0,0]).map(Number);for(let i=0;i<720;i++){x.fillStyle='rgba('+Math.round(m[0])+','+Math.round(m[1])+','+Math.round(m[2])+','+(.35+Math.random()*.65).toFixed(2)+')';x.beginPath();x.arc(Math.random()*128*z,Math.random()*128*z,(.5+Math.random()*.3)*z,0,6.2832);x.fill()}return 'url('+c.toDataURL()+')'}catch(e){return 'none'}}
+ return '<div class="mzc'+(x==1?' g':x==2?' r':'')+'" id="mzc'+k+'"><div class=mzcb><small>'+VN(s,k)+'</small><div class=mzbn><button class="mzk r'+(x==2?' on':'')+'" onclick="memMark('+s+','+k+',2)">Повторить</button><button class="mzk g'+(x==1?' on':'')+'" onclick="memMark('+s+','+k+',1)">Выучил</button></div></div><div class="mztx'+(hid?' hid':'')+'" onclick="memRev('+s+','+k+')">'+'<span class=dst>'+fmt(p)+'</span>'+'</div></div>'}
+let mzDC='',mzDU='';
+function mzDust(){try{const col=getComputedStyle($('#pb')).color;if(mzDU&&col==mzDC)return mzDU;const z=2,c=document.createElement('canvas');c.width=c.height=128*z;const x=c.getContext('2d'),m=(col.match(/[\d.]+/g)||[0,0,0]).map(Number);for(let i=0;i<720;i++){x.fillStyle='rgba('+Math.round(m[0])+','+Math.round(m[1])+','+Math.round(m[2])+','+(.35+Math.random()*.65).toFixed(2)+')';x.beginPath();x.arc(Math.random()*128*z,Math.random()*128*z,(.5+Math.random()*.3)*z,0,6.2832);x.fill()}let u=c.toDataURL();try{const r=atob(u.split(',')[1]),a=new Uint8Array(r.length);for(let i=0;i<r.length;i++)a[i]=r.charCodeAt(i);u=URL.createObjectURL(new Blob([a],{type:'image/png'}))}catch(e){}mzDC=col;mzDU='url('+u+')';return mzDU}catch(e){return 'none'}}
 function memSurah(s,keep){
  const pb=$('#pb'),sc=pb.scrollTop;
  pb.style.setProperty('--mzfs',Math.min(24,Math.max(16,st.fs||20))+'px');pb.style.setProperty('--mzff',ffCss(st.ff));pb.style.setProperty('--mzlh',st.lh||1.6);if(st.mzh)pb.style.setProperty('--mzdust',mzDust());
@@ -776,7 +777,7 @@ function memSurah(s,keep){
  if(c.g&&c.g<c.t){const u=mzU(s).find(k=>mzGet(s,k)!=1),e=u!=null&&document.getElementById('mzc'+u);if(e)pb.scrollTop=Math.max(0,pb.scrollTop+e.getBoundingClientRect().top-pb.getBoundingClientRect().top-90)}}
 function memMark(s,k,x){mzSet(s,k,mzGet(s,k)==x?0:x);sv();const e=document.getElementById('mzc'+k);if(e)e.outerHTML=memCard(s,k);const hd=$('#mzhd');if(hd)hd.innerHTML=memHead(s)}
 function memRev(s,k){if(!st.mzh)return;mzRev[k]=!mzRev[k];const e=document.getElementById('mzc'+k);if(e){e.outerHTML=memCard(s,k);if(mzRev[k]){const t=document.querySelector('#mzc'+k+' .mztx');if(t)t.classList.add('rv')}}}
-function memHide(){st.mzh=st.mzh?0:1;mzRev={};sv();if(memS>=0)memSurah(memS,1)}
+function memHide(){st.mzh=st.mzh?0:1;mzRev={};sv();const pb=$('#pb'),h=!!st.mzh;if(h)pb.style.setProperty('--mzdust',mzDust());const bt=document.querySelector('#mzhd .wd');if(bt){bt.classList.toggle('on',h);bt.textContent=h?'Показать текст':'Скрыть текст'}pb.querySelectorAll('.mztx').forEach(e=>{e.classList.remove('rv');e.classList.toggle('hid',h)})}
 function memAll(s,x){const u=mzU(s),same=u.every(k=>mzGet(s,k)==x);for(const k of u)mzSet(s,k,same?0:x);sv();memSurah(s,1);toast(same?'Отметки сняты':x==1?'Вся сура отмечена выученной':'Вся сура отмечена: повторить')}
 
 window.onBack=function(){if($('#dr').classList.contains('on')){DM(0);return}const e=$('#cf');if(e&&e.style.display=='flex'){cf(0);return}
