@@ -165,6 +165,11 @@ body[data-t=news] h2,body[data-t=night] h2{text-transform:uppercase;letter-spaci
 #sb{max-width:calc(100vw - 12px)}#sb{gap:4px;padding:6px 8px}#sb .cd{width:30px;height:30px;min-width:30px}#sb .ch{white-space:nowrap;padding:0 10px}#shr .ch.al.on,.ch.al.on{background:color-mix(in srgb,var(--ac) 16%,transparent);color:var(--ac);border-color:var(--ac)}#shimg{display:block;width:100%;height:auto;border-radius:14px;margin:16px 0 8px;box-shadow:0 2px 14px rgba(0,0,0,.3)}
 .cd{width:34px;height:34px;min-width:34px;border-radius:50%;border:2px solid transparent;padding:0}.cd.sel{border-color:var(--fg)}
 #bk p.cy{background:rgba(255,213,79,.38)}#bk p.cg{background:rgba(129,199,132,.38)}#bk p.cr{background:rgba(239,83,80,.33)}#bk p.cb{background:rgba(100,181,246,.38)}
+#bk .wh{border-radius:3px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+#bk .wh.wy{background:rgba(255,213,79,.6)}
+#bk .wh.wg{background:rgba(129,199,132,.6)}
+#bk .wh.wr{background:rgba(239,83,80,.5)}
+#bk .wh.wb{background:rgba(100,181,246,.6)}
 #bk p[class*=" c"],#bk p.cy,#bk p.cg,#bk p.cr,#bk p.cb{border-radius:6px}
 .mk{cursor:pointer;margin-left:4px;font-size:.8em}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;vertical-align:middle}
 select,textarea{font:inherit;font-size:16px;padding:10px;border-radius:10px;border:1px solid var(--ln);background:var(--bg);color:var(--fg)}
@@ -469,7 +474,8 @@ body[data-ks=n] #drb .dt{font:normal 600 22px Georgia,"Times New Roman",serif;co
 .mzbar i{display:block;height:100%;background:var(--mb);transition:width .25s}
 .mzbt{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px}
 .mzbt .ch{width:100%;padding:0 8px;font-size:14px}
-.mzbt .wd{grid-column:1/-1}
+.mzbt .wd{grid-column:auto}
+.mzbt #mzan{font-size:12px;padding:0 4px;white-space:nowrap}
 .mzc{border:1.5px solid var(--ln);border-radius:12px;padding:10px 12px;margin:0 0 8px;background:color-mix(in srgb,var(--fg) 4%,var(--bg));color:var(--fg)}
 .mzc.g{border-color:var(--mb);background:color-mix(in srgb,var(--mg) 24%,var(--bg))}
 .mzc.r{border-color:var(--mrb);background:color-mix(in srgb,var(--mr) 22%,var(--bg))}
@@ -484,9 +490,13 @@ body[data-ks=n] #drb .dt{font:normal 600 22px Georgia,"Times New Roman",serif;co
 .mztx.hid .dst{background-image:var(--mzdust,none),var(--mzdust,none),var(--mzdust,none);background-size:128px 128px,96px 96px,160px 160px;background-position:0 0,0 0,0 0;padding:calc((var(--mzlh,1.6) - 1.15)*.5em) 0;-webkit-box-decoration-break:clone;box-decoration-break:clone;animation:mzd 14s linear infinite}
 .mztx.hid .dst *{color:transparent!important;-webkit-text-fill-color:transparent!important;background:none!important}
 @keyframes mzd{to{background-position:128px 128px,0 -96px,-160px 0}}
+.mztx{position:relative}
+#pb.mzfog .mztx.hid .dst{background:none!important}
+.mztx.rv2 .dst{animation:mzf2 .35s ease-out}
+@keyframes mzf2{from{opacity:0}to{opacity:1}}
 .mztx.rv{animation:mzf .45s ease-out}
 @keyframes mzf{from{opacity:0;filter:blur(5px)}to{opacity:1;filter:none}}
-@media (prefers-reduced-motion:reduce){.mztx.hid .dst,.mztx.rv{animation:none}}
+@media (prefers-reduced-motion:reduce){.mztx.hid .dst,.mztx.rv,.mztx.rv2 .dst{animation:none}}
 .mzin{font-size:14px;text-align:center;color:var(--fg);opacity:.65;margin:0 0 10px}
 .mzdl{flex:1;min-width:0;text-align:left}
 .mzdl small{font-size:15px;opacity:.8}
@@ -544,7 +554,7 @@ function render(i,hl,last){
  vp.className=st.m;bk.className='ser';bk.style.fontFamily=ffCss(st.ff);bk.style.setProperty('--fs',st.fs+'px');bk.style.setProperty('--lh',st.lh);bk.style.setProperty('--al',st.al);bk.style.setProperty('--hy',st.hy?'auto':'none');
  const nav='<div class=nv>'+(st.s>0?'<button onclick="jumpN('+(st.s-1)+',0)">← Назад</button>':'')+(st.s<113?'<button onclick="jumpN('+(st.s+1)+',0)">Дальше →</button>':'')+'</div>';
  bk.innerHTML='<h2>Сура '+b[0]+'. '+esc(b[1])+'<button class=sp onclick="spPlay()" aria-label="Читать суру с начала"><svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="currentColor"/></svg></button></h2>'+b[2].map((p,k)=>'<p data-k='+k+pc(st.s,k,p)+'>'+fmt(p)+mkr(st.s,k)+'</p>').join('')+(st.m=='scroll'?nav:'');
- AN=null;lay();$('#ti').textContent=b[0]+'. '+b[1];fitTi();
+ whAll();AN=null;lay();$('#ti').textContent=b[0]+'. '+b[1];fitTi();
  if(last&&st.m=='page')setPage(1e4);else go(i);
  if(hl!=null){const e=bk.querySelector('[data-k="'+hl+'"]');if(e){e.classList.add('hl');setTimeout(()=>e.classList.remove('hl'),3000)}}
 }
@@ -680,7 +690,43 @@ document.addEventListener('selectionchange',()=>{const s=getSelection(),sb=$('#s
  let n=s.anchorNode;n=n&&(n.nodeType==3?n.parentElement:n);const p=n&&n.closest&&n.closest('#bk p');
  if(!p){sb.style.display='none';return}selK=+p.dataset.k;sb.style.display='flex'});
 function refreshP(k){const e=bk.querySelector('[data-k="'+k+'"]');if(!e)return;e.className=cls(st.s,k,B[st.s][2][k]).trim();const m=e.querySelector('.mk');if(m)m.remove();e.insertAdjacentHTML('beforeend',mkr(st.s,k))}
-function CK(c){if(selK==null)return;const key=st.s+':'+selK,o=st.nt[key]||{c:'',t:''};o.c=o.c==c?'':c;if(!o.c&&!o.t)delete st.nt[key];else st.nt[key]=o;sv();refreshP(selK);getSelection().removeAllRanges()}
+/* выделение цветом слова или буквы: хранится как диапазоны символов внутри аята, st.hl['сура:аят']=[[от,до,цвет],...] */
+function whNodes(p){const out=[],w=document.createTreeWalker(p,NodeFilter.SHOW_TEXT,{acceptNode:t=>t.parentElement.closest('.mk')?2:1});let n=0,t;while(t=w.nextNode()){out.push([t,n]);n+=t.length}return{out,T:n}}
+function whSel(p,sr){const{out}=whNodes(p);let a=-1,b=-1,all='';
+ for(const[t,n]of out){const len=t.length;all+=t.nodeValue;
+  if(sr.comparePoint(t,len)<0||sr.comparePoint(t,0)>0)continue;
+  const s=sr.startContainer===t?sr.startOffset:0,e=sr.endContainer===t?sr.endOffset:len;
+  if(e>s){if(a<0)a=n+s;b=n+e}}
+ if(a<0)return null;
+ while(a<b&&/\s/.test(all[a]))a++;while(b>a&&/\s/.test(all[b-1]))b--;
+ if(b<=a)return null;
+ const L=Math.max(0,all.search(/\S/)),R=all.replace(/\s+$/,'').length;
+ return{a,b,full:a<=L&&b>=R}}
+function whAdd(key,a,b,c){const H=st.hl||(st.hl={}),L=H[key]||[];let cov=0;
+ L.forEach(r=>{if(r[2]==c)cov+=Math.max(0,Math.min(b,r[1])-Math.max(a,r[0]))});
+ const off=cov>=b-a,N=[];
+ L.forEach(r=>{if(r[1]<=a||r[0]>=b){N.push(r);return}if(r[0]<a)N.push([r[0],a,r[2]]);if(r[1]>b)N.push([b,r[1],r[2]])});
+ if(!off)N.push([a,b,c]);
+ N.sort((x,y)=>x[0]-y[0]);
+ const M=[];N.forEach(r=>{const l=M[M.length-1];if(l&&l[2]==r[2]&&l[1]>=r[0])l[1]=Math.max(l[1],r[1]);else M.push(r.slice())});
+ if(M.length)H[key]=M;else delete H[key]}
+function whApply(p,key){
+ p.querySelectorAll('span.wh').forEach(s=>{const par=s.parentNode;while(s.firstChild)par.insertBefore(s.firstChild,s);par.removeChild(s)});p.normalize();
+ const L=(st.hl||{})[key];if(!L)return;
+ L.forEach(r=>{const{out}=whNodes(p);
+  for(const[t,n]of out){const len=t.length,s=Math.max(r[0],n)-n,e=Math.min(r[1],n+len)-n;if(e<=s)continue;
+   let x=t;if(e<len)x.splitText(e);if(s>0)x=x.splitText(s);
+   const sp=document.createElement('span');sp.className='wh w'+r[2];x.parentNode.insertBefore(sp,x);sp.appendChild(x)}})}
+function whAll(){const H=st.hl;if(!H)return;bk.querySelectorAll('p[data-k]').forEach(p=>{const key=st.s+':'+p.dataset.k;if(H[key])whApply(p,key)})}
+function CK(c){
+ let sr=null;try{const g=getSelection();if(g&&g.rangeCount&&!g.isCollapsed)sr=g.getRangeAt(0)}catch(e){}
+ const ps=sr?[...bk.querySelectorAll('p[data-k]')].filter(p=>sr.intersectsNode(p)):[];
+ let done=0;
+ ps.forEach(p=>{const r=whSel(p,sr);if(!r)return;done=1;const k=+p.dataset.k,key=st.s+':'+k;
+  if(r.full){const o=st.nt[key]||{c:'',t:''};o.c=o.c==c?'':c;if(!o.c&&!o.t)delete st.nt[key];else st.nt[key]=o;refreshP(k)}
+  else{whAdd(key,r.a,r.b,c);whApply(p,key)}});
+ if(!done&&selK!=null){const key=st.s+':'+selK,o=st.nt[key]||{c:'',t:''};o.c=o.c==c?'':c;if(!o.c&&!o.t)delete st.nt[key];else st.nt[key]=o;refreshP(selK)}
+ sv();try{getSelection().removeAllRanges()}catch(e){}}
 function SN(){if(selK==null)return;const k=selK;getSelection().removeAllRanges();NT(st.s,k)}
 function NT(s,k){nk=s+':'+k;ncol=(st.nt[nk]||{}).c||'';P('note')}
 function NC(c){ncol=ncol==c?'':c;document.querySelectorAll('#pb .cd').forEach(b=>b.classList.toggle('sel',b.dataset.c==ncol))}
@@ -756,7 +802,7 @@ function memShelf(){
 function memOpenS(s){if(s<0||s>113)return;if(memS<0)memSc=$('#pb').scrollTop;memS=s;mzRev={};memSurah(s)}
 function memBack(){memS=-1;$('#pt').textContent='Заучивание';memShelf();$('#pb').scrollTop=memSc}
 function memHead(s){const c=mzCnt(s),p=c.t?Math.round(c.g/c.t*100):0,u=mzU(s),aG=u.length&&u.every(k=>mzGet(s,k)==1),aR=u.length&&u.every(k=>mzGet(s,k)==2);
- return '<div class=mzr1><span>'+c.g+' из '+c.t+' аятов</span><span>'+p+'%</span></div><div class=mzbar><i style="width:'+p+'%"></i></div><div class=mzbt><button class="ch'+(aG?' on':'')+'" onclick="memAll('+s+',1)">Вся сура выучена</button><button class="ch'+(aR?' on':'')+'" onclick="memAll('+s+',2)">Вся сура: повторить</button><button class="ch wd'+(st.mzh?' on':'')+'" onclick="memHide()">'+(st.mzh?'Показать текст':'Скрыть текст')+'</button></div>'}
+ return '<div class=mzr1><span>'+c.g+' из '+c.t+' аятов</span><span>'+p+'%</span></div><div class=mzbar><i style="width:'+p+'%"></i></div><div class=mzbt><button class="ch'+(aG?' on':'')+'" onclick="memAll('+s+',1)">Вся сура выучена</button><button class="ch'+(aR?' on':'')+'" onclick="memAll('+s+',2)">Вся сура: повторить</button><button class="ch wd'+(st.mzh?' on':'')+'" onclick="memHide()">'+(st.mzh?'Показать текст':'Скрыть текст')+'</button><button class=ch id=mzan onclick="memAnim()">Анимация: '+(st.mza==5?'Туман':'по умолчанию')+'</button></div>'}
 function memCard(s,k){const p=B[s][2][k],n=ayn(s)[k];
  if(!n.length)return '<div class=mzin id="mzc'+k+'">'+fmt(p)+'</div>';
  const x=mzGet(s,k),hid=st.mzh&&!mzRev[k];
@@ -776,8 +822,136 @@ function memSurah(s,keep){
  pb.scrollTop=0;const c=mzCnt(s);
  if(c.g&&c.g<c.t){const u=mzU(s).find(k=>mzGet(s,k)!=1),e=u!=null&&document.getElementById('mzc'+u);if(e)pb.scrollTop=Math.max(0,pb.scrollTop+e.getBoundingClientRect().top-pb.getBoundingClientRect().top-90)}}
 function memMark(s,k,x){mzSet(s,k,mzGet(s,k)==x?0:x);sv();const e=document.getElementById('mzc'+k);if(e)e.outerHTML=memCard(s,k);const hd=$('#mzhd');if(hd)hd.innerHTML=memHead(s)}
-function memRev(s,k){if(!st.mzh)return;mzRev[k]=!mzRev[k];const e=document.getElementById('mzc'+k);if(e){e.outerHTML=memCard(s,k);if(mzRev[k]){const t=document.querySelector('#mzc'+k+' .mztx');if(t)t.classList.add('rv')}}}
-function memHide(){st.mzh=st.mzh?0:1;mzRev={};sv();const pb=$('#pb'),h=!!st.mzh;if(h)pb.style.setProperty('--mzdust',mzDust());const bt=document.querySelector('#mzhd .wd');if(bt){bt.classList.toggle('on',h);bt.textContent=h?'Показать текст':'Скрыть текст'}pb.querySelectorAll('.mztx').forEach(e=>{e.classList.remove('rv');e.classList.toggle('hid',h)})}
+/* Анимация скрытия: 0 = по умолчанию; 5 = Туман (хаотичные точки) */
+const MZD={5:750},mzGC=new Map(),mzLive=new Set();
+let mzLR=0,mzSB=0;
+function mzOn(){return !!MZD[st.mza]}
+function memAnim(){st.mza=st.mza==5?0:5;sv();const b=$('#mzan');if(b)b.textContent='Анимация: '+(st.mza==5?'Туман':'по умолчанию');mzSync()}
+function mzPts(t,R,max){
+ const out=[],tw=document.createTreeWalker(t,NodeFilter.SHOW_TEXT),rg=document.createRange(),cv=document.createElement('canvas'),cx=cv.getContext('2d',{willReadFrequently:true});
+ if(mzGC.size>3000)mzGC.clear();
+ let n;
+ while((n=tw.nextNode())){
+  const tx=n.nodeValue,pe=n.parentElement;if(!pe||!tx)continue;
+  const cs=getComputedStyle(pe),font=cs.fontStyle+' '+cs.fontWeight+' '+cs.fontSize+' '+cs.fontFamily;
+  for(let i=0;i<tx.length;i++){
+   const ch=tx[i];if(/[\s\u00ad\u200b]/.test(ch))continue;
+   rg.setStart(n,i);rg.setEnd(n,i+1);
+   const rc=rg.getBoundingClientRect();if(rc.width<.5||rc.height<.5)continue;
+   const key=font+'|'+ch;let g=mzGC.get(key);
+   if(!g){
+    const w=Math.ceil(rc.width)+4,h=Math.ceil(rc.height)+4;
+    cv.width=w;cv.height=h;cx.font=font;cx.fillStyle='#000';cx.textBaseline='alphabetic';
+    const asc=cx.measureText(ch).fontBoundingBoxAscent||rc.height*.8;
+    cx.fillText(ch,2,2+asc);
+    const d=cx.getImageData(0,0,w,h).data;g=[];
+    for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(d[(y*w+x)*4+3]>100)g.push(x-2,y-2);
+    mzGC.set(key,g)}
+   const ox=rc.left-R.left,oy=rc.top-R.top;
+   for(let j=0;j<g.length;j+=2)out.push(ox+g[j],oy+g[j+1])}}
+ const N=out.length/2;
+ if(N>max){const p=max/N,o2=[];for(let i=0;i<out.length;i+=2)if(Math.random()<p)o2.push(out[i],out[i+1]);return{a:o2,N}}
+ return{a:out,N}}
+const mzEase=u=>u<.5?4*u*u*u:1-Math.pow(-2*u+2,3)/2,mzCl=x=>x<0?0:x>1?1:x;
+function mzRM(){try{return matchMedia('(prefers-reduced-motion:reduce)').matches}catch(e){return false}}
+function mzVis(t,m){m=m||0;const r=t.getBoundingClientRect(),p=$('#pb').getBoundingClientRect();return r.width>0&&r.bottom>p.top-m&&r.top<p.bottom+m}
+function mzDens(W,H){return Math.max(150,Math.min(5000,Math.round(W*H/14)))}
+/* P: старт x,y | покой x,y | задержка | фаза | скорость | случ1 | случ2 */
+function mzMk(t,W,H,n){
+ const dpr=Math.min(2,window.devicePixelRatio||1),pad=24,cv=document.createElement('canvas');
+ cv.width=Math.ceil((W+2*pad)*dpr);cv.height=Math.ceil((H+2*pad)*dpr);
+ cv.style.cssText='position:absolute;left:'+(-pad)+'px;top:'+(-pad)+'px;width:'+(W+2*pad)+'px;height:'+(H+2*pad)+'px;pointer-events:none;z-index:2';
+ const cx=cv.getContext('2d');cx.setTransform(dpr,0,0,dpr,0,0);
+ t.appendChild(cv);
+ return{cv,cx,P:new Float32Array(n*9),n,W,H,pad,col:getComputedStyle($('#pb')).color}}
+function mzCloud(t,R,max){
+ const W=R.width,H=R.height,G=mzPts(t,R,max),g=G.a,n=g.length/2;
+ if(!n)return null;
+ const cs=getComputedStyle(t),lhp=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.6,lines=Math.max(1,Math.round(H/lhp)),lh=H/lines,S=mzMk(t,W,H,n),P=S.P;
+ let mx=.0001;
+ for(let i=0;i<n;i++){
+  const gx=g[2*i],gy=g[2*i+1],o=i*9,k=Math.random()<.08?2:1;
+  P[o]=gx;P[o+1]=gy;
+  P[o+2]=gx+(Math.random()+Math.random()+Math.random()-1.5)*16*k;
+  P[o+3]=gy+(Math.random()+Math.random()+Math.random()-1.5)*14*k;
+  P[o+5]=Math.random()*6.283;P[o+6]=Math.random();P[o+7]=(Math.random()-.5)*2;P[o+8]=Math.random();
+  const dl=Math.floor(gy/lh)/lines+Math.random()*.2;P[o+4]=dl;if(dl>mx)mx=dl}
+ for(let i=0;i<n;i++)P[i*9+4]/=mx;
+ return S}
+function mzDrawS(S,T,now,asm,al){
+ const cx=S.cx,P=S.P,n=S.n,pad=S.pad,tm=now/1000,SP=.55;
+ cx.clearRect(0,0,S.W+2*pad,S.H+2*pad);cx.fillStyle=S.col;
+ for(let b=0;b<2;b++){
+  cx.globalAlpha=al*(b?.5:.95);cx.beginPath();
+  for(let i=b;i<n;i+=2){
+   const o=i*9;let dl=P[o+4];if(asm)dl=1-dl;
+   const e=mzEase(mzCl((T-dl*(1-SP))/SP)),gx=P[o],gy=P[o+1],rx=P[o+2],ry=P[o+3],w=Math.sin(Math.PI*e),ph=P[o+5],sp=P[o+6];
+   let x=gx+(rx-gx)*e+w*P[o+7]*12,y=gy+(ry-gy)*e+w*(P[o+8]-.5)*14;
+   const a=1.5+sp*3,r=.5+P[o+8]*.35;
+   x+=Math.cos(ph+tm*(.5+sp*.7))*a*e;y+=Math.sin(ph*1.3+tm*(.4+sp*.6))*a*e;
+   cx.rect(x+pad-r,y+pad-r,2*r,2*r)}
+  cx.fill()}}
+/* точки в состоянии покоя продолжают тихо кружиться (только у видимых аятов) */
+function mzLoop(now){
+ mzLive.forEach(t=>{if(!t.isConnected||!t._lv){mzLive.delete(t);return}mzDrawS(t._lv,1,now,0,1)});
+ mzLR=mzLive.size?requestAnimationFrame(mzLoop):0}
+function mzLiveOn(t){mzLive.add(t);if(!mzLR)mzLR=requestAnimationFrame(mzLoop)}
+function mzLiveOff(t){mzLive.delete(t);if(t._lv){t._lv.cv.remove();t._lv=null}}
+function mzRest(t){
+ const R=t.getBoundingClientRect();if(!R.width||!R.height)return;
+ const S=mzCloud(t,R,mzDens(R.width,R.height));if(!S)return;
+ t._lv=S;mzDrawS(S,1,performance.now(),0,1);mzLiveOn(t)}
+function mzSync(){
+ const pb=$('#pb');if(!pb)return;
+ const fog=mzOn()&&!mzRM();
+ pb.classList.toggle('mzfog',fog);
+ if(!mzSB){mzSB=1;let q=0;const f=()=>{if(q)return;q=requestAnimationFrame(()=>{q=0;mzSync()})};pb.addEventListener('scroll',f,{passive:true});window.addEventListener('resize',()=>{mzLive.forEach(mzLiveOff);f()})}
+ if(!fog){mzLive.forEach(mzLiveOff);return}
+ if(!st.mzh&&!mzLive.size)return;
+ pb.querySelectorAll('.mztx').forEach(t=>{
+  if(!t.classList.contains('hid')){if(t._lv)mzLiveOff(t);return}
+  if(t.dataset.an)return;
+  const v=mzVis(t,500);
+  if(v&&!t._lv)mzRest(t);else if(!v&&t._lv)mzLiveOff(t)})}
+function mzStop(t){mzLiveOff(t);if(t._mz){cancelAnimationFrame(t._mz.raf);clearTimeout(t._mz.to);t._mz.cv.remove();t._mz=null}t.classList.remove('dis','asm','rv2');delete t.dataset.an}
+/* asm=0: буквы рассыпаются в точки на месте; asm=1: точки собираются обратно в слова на месте */
+function mzGo(t,asm,max){
+ const D=MZD[st.mza],R=t.getBoundingClientRect();
+ let S=(asm&&t._lv&&t._lv.P)?t._lv:null,re=!!S;
+ if(S){mzLive.delete(t);t._lv=null}
+ mzStop(t);
+ if(!D||mzRM()||!R.width||!R.height){if(S)S.cv.remove();t.classList.toggle('hid',!asm);return}
+ if(!S)S=mzCloud(t,R,Math.min(max||5000,mzDens(R.width,R.height)));
+ if(!S){t.classList.toggle('hid',!asm);return}
+ const t0=performance.now(),ms={cv:S.cv,raf:0,to:0};
+ t._mz=ms;t.dataset.an=1;
+ const draw=now=>{
+  if(!t.isConnected){mzStop(t);return}
+  const q=mzCl((now-t0)/D);
+  mzDrawS(S,asm?1-q:q,now,asm,asm&&!re?mzCl(q/.2):1);
+  if(q<1){ms.raf=requestAnimationFrame(draw);return}
+  delete t.dataset.an;
+  if(asm){t.classList.remove('hid','asm');t.classList.add('rv2');S.cv.style.transition='opacity .35s';S.cv.style.opacity=0;ms.to=setTimeout(()=>{if(t._mz===ms)mzStop(t)},400)}
+  else{t.classList.remove('dis');t._mz=null;t._lv=S;mzLiveOn(t)}};
+ draw(t0);
+ t.classList.add(asm?'asm':'dis');if(!asm)t.classList.add('hid')}
+function memRev(s,k){if(!st.mzh)return;
+ if(!mzOn()){mzRev[k]=!mzRev[k];const e=document.getElementById('mzc'+k);if(e){e.outerHTML=memCard(s,k);if(mzRev[k]){const t=document.querySelector('#mzc'+k+' .mztx');if(t)t.classList.add('rv')}}return}
+ const t=document.querySelector('#mzc'+k+' .mztx');if(!t||t.dataset.an)return;mzRev[k]=!mzRev[k];mzGo(t,!!mzRev[k],5000)}
+function memHide(){st.mzh=st.mzh?0:1;mzRev={};sv();const pb=$('#pb'),h=!!st.mzh;if(h)pb.style.setProperty('--mzdust',mzDust());const bt=document.querySelector('#mzhd .wd');if(bt){bt.classList.toggle('on',h);bt.textContent=h?'Показать текст':'Скрыть текст'}
+ mzSync();
+ const all=[...pb.querySelectorAll('.mztx')];
+ if(!mzOn()||mzRM()){all.forEach(e=>{mzStop(e);e.classList.remove('rv');e.classList.toggle('hid',h)});return}
+ const list=all.filter(e=>h||e.classList.contains('hid')),vis=list.filter(e=>mzVis(e)),mx=Math.max(1500,Math.min(5000,Math.floor(12000/(vis.length||1))));
+ all.forEach(e=>{
+  e.classList.remove('rv');
+  if(list.indexOf(e)<0){mzStop(e);return}
+  if(vis.indexOf(e)>=0){
+   if(h){if(e.classList.contains('hid')){mzStop(e)}else mzGo(e,0,mx)}
+   else mzGo(e,1,mx)}
+  else{mzStop(e);e.classList.toggle('hid',h)}});
+ mzSync()}
+['memSurah','memMark','memAll'].forEach(n=>{const f=window[n];if(typeof f!=='function')return;window[n]=function(){const r=f.apply(this,arguments);try{mzSync()}catch(e){}return r}});
 function memAll(s,x){const u=mzU(s),same=u.every(k=>mzGet(s,k)==x);for(const k of u)mzSet(s,k,same?0:x);sv();memSurah(s,1);toast(same?'Отметки сняты':x==1?'Вся сура отмечена выученной':'Вся сура отмечена: повторить')}
 
 window.onBack=function(){if($('#dr').classList.contains('on')){DM(0);return}const e=$('#cf');if(e&&e.style.display=='flex'){cf(0);return}
