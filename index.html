@@ -1485,7 +1485,45 @@ const QR=(()=>{
       let count=0;
       for(const f of files){
         const n=parseSurah(f.name);
-        if(!n)continue;
+        if(!n)continue;const blob=new Blob([f],{type:mimeType(f.name)});
+        await dbPut('files',{n,blob});
+        count++;
+        emit('progress',{count});
+      }
+      return {count};
+    },
+
+    async writeMeta({n,json}){
+      await dbPut('meta',{n:+n,json});
+    },
+
+    async clear(){
+      blobUrls.forEach(u=>URL.revokeObjectURL(u));
+      blobUrls=[];
+      const db=await openDB();
+      return new Promise((res,rej)=>{
+        const tx=db.transaction(['files','meta'],'readwrite');
+        tx.objectStore('files').clear();
+        tx.objectStore('meta').clear();
+        tx.oncomplete=()=>res();
+        tx.onerror=()=>rej(tx.error);
+      });
+    },
+
+    async mediaShow({title,sub,playing}){
+      if(!('mediaSession' in navigator))return;
+      navigator.mediaSession.metadata=new MediaMetadata({title:title||'Коран',artist:sub||''});
+      navigator.mediaSession.playbackState=playing?'playing':'paused';
+      navigator.mediaSession.setActionHandler('play',()=>emit('mediaAction',{action:'toggle'}));
+      navigator.mediaSession.setActionHandler('pause',()=>emit('mediaAction',{action:'toggle'}));
+      navigator.mediaSession.setActionHandler('stop',()=>emit('mediaAction',{action:'stop'}));
+    },
+
+    async mediaStop(){
+      if('mediaSession' in navigator)navigator.mediaSession.playbackState='none';
+    }
+  };
+})();
 const WB=(()=>{try{const C=window.Capacitor;return C&&((C.Plugins&&C.Plugins.WidgetBridge)||(C.registerPlugin&&C.registerPlugin('WidgetBridge')))||null}catch(e){return null}})();
 function wgGet(){if(!st.wg)st.wg={c:'auto',a:0};return st.wg}
 function wgPal(c){if(c&&c!=='auto'){const t=TH.find(x=>x[0]===c);if(t)return{bg:t[2],fg:t[3],ac:t[4]}}
