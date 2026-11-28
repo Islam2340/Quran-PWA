@@ -8,6 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Коран">
+<script src="https://cdn.jsdelivr.net/npm/@zip.js/zip.js@2.7.52/dist/zip.min.js" defer></script>
 
 <style>
 :root{box-sizing:border-box}*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -1356,7 +1357,135 @@ const IC={play:'<svg viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z" fill="curre
 let tt={mode:'',state:'idle',s:0,k:0,ci:0,id:0,au:0};
 /* Записанная озвучка из памяти приложения: индекс суры (сура 60 = 59) -> {file,t,src}; t - [начало,конец] каждого абзаца (0 = басмала) */
 const AUD={};
-const QR=(()=>{try{const C=window.Capacitor;return C&&((C.Plugins&&C.Plugins.QuranReader)||(C.registerPlugin&&C.registerPlugin('QuranReader')))||null}catch(e){return null}})();
+const QR=(()=>{
+  try{
+    const C=window.Capacitor;
+    const nat=C&&((C.Plugins&&C.Plugins.QuranReader)||(C.registerPlugin&&C.registerPlugin('QuranReader')));
+    if(nat)return nat;
+  }catch(e){}
+
+  // Веб-реализация QR для PWA (iPhone / браузер)
+  const DB_NAME='quran_pwa_audio', DB_VER=1;
+  const listeners={};
+  let blobUrls=[];
+
+  function emit(ev,data){(listeners[ev]||[]).forEach(fn=>{try{fn(data)}catch(e){}})}
+
+  function openDB(){
+    return new Promise((res,rej)=>{
+      const req=indexedDB.open(DB_NAME,DB_VER);
+      req.onupgradeneeded=e=>{
+        const db=e.target.result;
+        if(!db.objectStoreNames.contains('files'))db.createObjectStore('files',{keyPath:'n'});
+        if(!db.objectStoreNames.contains('meta'))db.createObjectStore('meta',{keyPath:'n'});
+      };
+      req.onsuccess=()=>res(req.result);
+      req.onerror=()=>rej(req.error);
+    });
+  }
+
+  async function dbPut(store,obj){
+    const db=await openDB();
+    return new Promise((res,rej)=>{
+      const tx=db.transaction(store,'readwrite');
+      tx.objectStore(store).put(obj);
+      tx.oncomplete=()=>res();
+      tx.onerror=()=>rej(tx.error);
+    });
+  }
+
+  async function dbAll(store){
+    const db=await openDB();
+    return new Promise((res,rej)=>{
+      const tx=db.transaction(store,'readonly');
+      const req=tx.objectStore(store).getAll();
+      req.onsuccess=()=>res(req.result||[]);
+      req.onerror=()=>rej(req.error);
+    });
+  }
+
+  function parseSurah(name){
+    const base=name.split('/').pop();
+    if(!/\.(mp3|m4a|aac|ogg|wav|opus)$/i.test(base))return 0;
+    const m=/^s?0*(\d{1,3})(?=\D|$)/i.exec(base);
+    const n=m?+m[1]:0;
+    return (n>=1&&n<=114)?n:0;
+  }
+
+  function mimeType(name){
+    if(/\.m4a$/i.test(name))return 'audio/mp4';
+    if(/\.aac$/i.test(name))return 'audio/aac';
+    if(/\.ogg$/i.test(name))return 'audio/ogg';
+    if(/\.wav$/i.test(name))return 'audio/wav';
+    return 'audio/mpeg';
+  }
+
+  function pickFiles(accept,multiple){
+    return new Promise((res,rej)=>{
+      const inp=document.createElement('input');
+      inp.type='file';
+      inp.accept=accept;
+      if(multiple)inp.multiple=true;
+      inp.style.display='none';
+      document.body.appendChild(inp);
+      let done=false;
+      const finish=files=>{
+        if(done)return; done=true;
+        inp.remove();
+        if(!files||!files.length)rej(new Error('cancel'));
+        else res(files);
+      };
+      inp.onchange=()=>finish(inp.files);
+      inp.oncancel=()=>finish(null);
+      inp.click();
+    });
+  }
+
+  return {
+    addListener(ev,fn){(listeners[ev]=listeners[ev]||[]).push(fn)},
+
+    async list(){
+      blobUrls.forEach(u=>URL.revokeObjectURL(u));
+      blobUrls=[];
+      const [files,metas]=await Promise.all([dbAll('files'),dbAll('meta')]);
+      const metaMap={};
+      for(const m of metas)metaMap[m.n]=m.json;
+      const items=files.map(f=>{
+        const path=URL.createObjectURL(f.blob);
+        blobUrls.push(path);
+        return {n:f.n, path, meta:metaMap[f.n]||''};
+      });
+      return {items};
+    },
+
+    async pickZip(){
+      const files=await pickFiles('.zip,application/zip,application/x-zip-compressed',false);
+      if(!window.zip)throw new Error('zip.js не загружен (проверьте интернет)');
+      const reader=new zip.ZipReader(new zip.BlobReader(files[0]));
+      let count=0;
+      try{
+        const entries=await reader.getEntries();
+        for(const ent of entries){
+          if(ent.directory)continue;
+          const n=parseSurah(ent.filename);
+          if(!n)continue;
+          const blob=await ent.getData(new zip.BlobWriter(mimeType(ent.filename)));
+          await dbPut('files',{n,blob});
+          count++;
+          emit('progress',{count});
+        }
+      }finally{
+        await reader.close();
+      }
+      return {count};
+    },
+
+    async pickFolder(){
+      const files=await pickFiles('audio/*',true);
+      let count=0;
+      for(const f of files){
+        const n=parseSurah(f.name);
+        if(!n)continue;
 const WB=(()=>{try{const C=window.Capacitor;return C&&((C.Plugins&&C.Plugins.WidgetBridge)||(C.registerPlugin&&C.registerPlugin('WidgetBridge')))||null}catch(e){return null}})();
 function wgGet(){if(!st.wg)st.wg={c:'auto',a:0};return st.wg}
 function wgPal(c){if(c&&c!=='auto'){const t=TH.find(x=>x[0]===c);if(t)return{bg:t[2],fg:t[3],ac:t[4]}}
